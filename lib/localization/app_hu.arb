@@ -1,0 +1,212 @@
+{
+  "appName": "Nappali",
+  "globalExceptionInvalidEmail": "A megadott email-cím érvénytelen",
+  "globalExceptionOperationNotAllowed": "Ez a művelet nem engedélyezett",
+  "globalExceptionTooManyRequests": "Túl sok kérés történt",
+  "globalExceptionUnknownError": "Ismeretlen hiba",
+  "signInExceptionEmailNotVerified": "Ez az email-cím még nincs visszaigazolva",
+  "signInExceptionNetworkError": "Hálózati hiba lépett fel",
+  "signInExceptionUserDisabled": "A felhasználó le van tiltva",
+  "signInExceptionUserNotFound": "A megadott felhasználó nem létezik",
+  "signInExceptionWrongPassword": "Helytelen jelszó",
+  "signInSuccess": "Sikeres belépés",
+  "signUpExceptionEmailAlreadyUsed": "Ez az email-cím már használatban van",
+  "signUpExceptionWeakPassword": "A megadott jelszó túl gyenge",
+  "signUpSuccess": "Sikeres regisztráció",
+  "verifyEmailExceptionEmailNotSent": "A visszaigazoló email-t nem lehetett elküldedni",
+  "verifyEmailSuccessSent": "Visszaigazoló email elküldve",
+  "databaseExceptionPermissionDenied": "Engedély megtagadva",
+  "databaseExceptionNoDocument": "Nem található a keresett elem",
+  "globalProcessingRequest": "Feldolgozás...",
+  "globalEmail": "Email",
+  "globalPassword": "Jelszó",
+  "globalPasswordAgain": "Jelszó újra",
+  "globalSignIn": "Bejelentkezés",
+  "globalSignUp": "Regisztráció",
+  "globalSignOut": "Kijelentkezés",
+  "verifyEmailScreenSendVerify": "Visszaigazoló email küldése",
+  "verifyEmailScreenVerifyYourEmail": "Email-cím visszaigazolása",
+  "globalBack": "Vissza",
+  "wrongRouteScreenPageNotFound": "Az oldal nem található",
+  "noConnectionScreenConnectionError": "A készülék jelenleg nem kapcsolódik hálózatra. Próbálj meg egy hálózathoz csatlakozni WIFI, Bluetooth, vagy egyéb kapcsolaton keresztül.",
+  "noConnectionScreenInternetError": "A készülék nem tud kapcsolódni az Internetre.",
+  "noConnectionScreenNoConnection": "Nincs kapcsolat",
+  "globalRefresh": "Frissít",
+  "bannedScreenBeingBanned": "Felhasználó kitiltva",
+  "bannedScreenBeingBannedDescription": "A jelenlegi felhasználó ({email}) el van tiltva az alkalmazás használatától.",
+  "@bannedScreenBeingBannedDescription": {
+    "placeHolders": {
+      "email": {}
+    }
+  },
+  "invalidInputEmpty": "Nem lehet üres a beviteli mező",
+  "invalidInputEmail": "Hibás email-cím",
+  "invalidInputPassword": "Hibás jelszó",
+  "invalidInputPasswordsNotMatch": "A megadott jelszavak nem egyeznek",
+  "settingsScreenPictureModification": "Kép módosítása",
+  "settingsScreenPictureCamera": "Kép készítése",
+  "settingsScreenPictureGallery": "Választás a képek közül",
+  "settingsScreenPictureReset": "Visszaállítás",
+  "globalPublic": "Nyilvános",
+  "globalApprove": "Jóváhagy",
+  "globalApproveSlide": "Jóváhagyáshoz húzd el",
+  "settingsScreenNameModification": "Név módosítása",
+  "settingsScreenPictureSetDescription": "Ez a kép látható lesz mások számára",
+  "settingsScreenPictureCantBeUndone": "A módosítás nem vonható vissza",
+  "settingsScreenNameSetDescription": "Ez a név látható lesz mások számára",
+  "settingsScreenEmailNotModifiable": "Az email-cím nem módosítható",
+  "settingsScreenPictureReallyModify": "Valóban meg szeretnéd változtatni a profilképedet?",
+  "globalSuccessfulOperation": "Sikeres művelet",
+  "globalUnsuccessfulOperation": "Sikertelen művelet",
+  "globalEdit": "Szerkesztés",
+  "familiesTabXFamily": "{familyName} család",
+  "@familiesTabXFamily": {
+    "description": "Given family name with the word family after",
+    "placeHolders": {
+      "familyName": {
+        "type": "String"
+      }
+    }
+  },
+  "familiesTabFamilies": "Családok",
+  "familiesTabInvitations": "Meghívók",
+  "familiesTabCreateAddFamily": "Család hozzáadása",
+  "familiesTabCreateNameOfFamily": "Család neve",
+  "generalAddSlide": "Hozzáadás húzással",
+  "familiesTabCreatePhotoEdit": "Fotó szerkesztése",
+  "familiesTabCreatePhotoFamilyPhotoModification": "Családi fotó módosítása",
+  "familiesTabCreatePhotoPickInfo": "Ez a fotó a családtagok és azok számára lesz látható, akiknek meghívót küldesz",
+  "familiesTabCreatePhotoSetThis": "Beállítod ezt a fotót a család fotójaként?",
+  "familiesTabCreateNameShouldNotBeEmpty": "A név nem lehet üres",
+  "familiesTabCreateDescriptionOfFamily": "Leírás",
+  "familiesTabCreateInvitee": "Meghívott email-címe",
+  "globalAdd": "Hozzáadás",
+  "familiesTabCreateUserAddedOrNull": "A felhasználó vagy hozzá lett már adva a meghívólistához, vagy nem létezik",
+  "familiesTabCreatePhoto": "Fotó",
+  "familiesTabCreateBasics": "Alapadatok",
+  "familiesTabCreateMembers": "Tagok",
+  "familiesTabCreateInvitedMembers": "Meghívott felhasználók",
+  "familiesTabCreateProcessSaveFamily": "Család elmentése",
+  "familiesTabCreateProcessSaveOwnerMember": "Tulajdonos hozzáadása a tagokhoz",
+  "familiesTabCreateProcessSaveOwnerInvite": "Tulajdonos meghívása",
+  "familiesTabCreateProcessUploadPhoto": "Fotó feltöltése",
+  "familiesTabCreateProcessSavePhotoUrl": "Fotó családhoz kapcsolása",
+  "familiesTabCreateProcessSaveInvites": "Mások meghívása",
+  "generalDone": "Kész",
+  "familiesTabCreateInvitationMessage": "Meghívás üzenete",
+  "familiesTabEditModifyFamily": "Család módosítása",
+  "globalAccept": "Elfogad",
+  "globalDecline": "Elutasít",
+  "familiesTabXFamiliesInvitation": "{familyName} család meghívása",
+  "familiesTabInvitationMessage": "Meghívás",
+  "familiesTabInvitationSender": "Meghívó fél",
+  "tasksTabTasks": "Feladatok",
+  "tasksCreateNew": "Új feladat hozzáadása",
+  "globalDaysMonday": "Hétfő",
+  "globalDaysSaturday": "Szombat",
+  "globalDaysSunday": "Vasárnap",
+  "globalDaysThursday": "Csütürtök",
+  "globalDaysToday": "Ma",
+  "globalDaysTuesday": "Kedd",
+  "globalDaysWednesday": "Szerda",
+  "globalMonthsApril": "Április",
+  "globalMonthsAugust": "Augusztus",
+  "globalMonthsDecember": "December",
+  "globalMonthsFebruary": "Február",
+  "globalMonthsJanuary": "Január",
+  "globalMonthsJuly": "Július",
+  "globalMonthsJune": "Június",
+  "globalMonthsMarch": "Március",
+  "globalMonthsMay": "Május",
+  "globalMonthsNovember": "November",
+  "globalMonthsOctober": "Október",
+  "globalMonthsSeptember": "Szeptember",
+  "tasksTabEditDeadline": "Határidő",
+  "tasksTabEditTitle": "Cím",
+  "tasksTabEditPoints": "Pontszám",
+  "globalModifySlide": "Módosítás húzással",
+  "tasksTabEditAddTask": "Feladat hozzáadása",
+  "tasksTabEditModifyTask": "Feladat módosítása",
+  "familiesTabManageFamilies": "Családok kezelése",
+  "tasksTabPreviousTasks": "Minden feladat",
+  "tasksTabEditTaskPhotoModification": "Feladat fotó módosítása",
+  "tasksTabEditTaskSetThis": "Beállítod ezt a képet a feladat fotójaként?",
+  "tasksTabEditTaskModifyTask": "Feladat módosítása",
+  "globalMe": "én",
+  "tasksTabEditCreatedAt": "(Kiosztva ekkor: {date})",
+  "@tasksTabEditCreatedAt": {
+    "placeHolders": {
+      "date": {
+        "type": "string"
+      }
+    }
+  },
+  "tasksTabEditDeadlineMustBeFuture": "A kijelölt határidőnek a jövőben kell lennie",
+  "tasksTabDetailsInProgress": "Teljesítés alatt",
+  "tasksTabDetailsAccomplished": "Teljesítve",
+  "tasksTabDetailsApproved": "Elfogadva",
+  "tasksTabDetailsNotApproved": "Nincs elfogadva",
+  "tasksTabDetailsApprove": "Elfogadás",
+  "globalRemoveUser": "Eltávolítás a családból",
+  "globalDeclareAsParent": "Szülővé nyilvánítás",
+  "globalDeclareAsChild": "Gyermekké nyilvánítás",
+  "globalTypeParent": "Szülő",
+  "globalTypeCreator": "Létrehozó / adminisztrátor",
+  "globalTypeChild": "Gyermek",
+  "tasksTabCreateGoal": "Új cél hozzáadása",
+  "globalDiscardModifications": "Módosítások elvetése",
+  "goalDetailsAdd": "Cél létrehozása",
+  "goalDetailsEditGoal": "Cél módosítása",
+  "goalDetailsCreatedAt": "(Létrehozva ekkor: {date})",
+  "@goalDetailsCreatedAt": {
+    "placeHolders": {
+      "date": {
+        "type": "string"
+      }
+    }
+  },
+  "tasksTabGoals": "Célok",
+  "tasksTabPreviousGoals": "Minden cél",
+  "tasksTabNotEnoughPointsToDisapprove": "A felhasználónak nincs elegendő pontja, ahhoz, hogy visszavond az elfogadást és le lehessen vonni a pontokat.",
+  "tasksTabGoalsYouAchieved": "Elérted a célod, most már be is válthatod rá a pontjaidat.",
+  "tasksTabGoalsTradePoints": "Pontok beváltása",
+  "tasksTabGoalsApprove": "Elfogad",
+  "tasksTabGoalsApproveDescription": "Ezt a célt szeretné a felhasználó ha elfogadnád.",
+  "profileTabNotifications": "Értesítések",
+  "profileTabNotificationsDescription": "Ha bekapcsolod, akkor olyan eseményekről kaphatsz értesítést, mint például egy új feladat kíírása, vagy egy teljesítés elfogadása.",
+  "globalSuccessPasswordChangeComplete": "Jelszó módosítva",
+  "profileChangePassword": "Jelszó módosítása",
+  "profileTabOldPassword": "Korábbi jelszó",
+  "tasksTabXPoints": "{points} pont",
+  "@tasksTabXPoints": {
+    "placeHolders": {
+      "points": {}
+    }
+  },
+  "tasksTabXTasks": "{tasks} feladat",
+  "@tasksTabXTasks": {
+    "placeHolders": {
+      "tasks": {}
+    }
+  },
+  "tasksTabXFinished": "{tasks} teljesítés",
+  "@tasksTabXFinished": {
+    "placeHolders": {
+      "tasks": {}
+    }
+  },
+  "tasksTabXGoals": "{goals} cél",
+  "@tasksTabXGoals": {
+    "placeHolders": {
+      "goals": {}
+    }
+  },
+  "tasksTabXAchieved": "{goals} elért cél",
+  "@tasksTabXAchieved": {
+    "placeHolders": {
+      "goals": {}
+    }
+  },
+  "signInScreenForgotPassword": "Elfelejtetted a jelszavad?",
+  "globalDelete": "Törlés"
+}

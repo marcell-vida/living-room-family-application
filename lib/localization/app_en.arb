@@ -1,0 +1,212 @@
+{
+  "appName": "Living Room",
+  "globalExceptionInvalidEmail": "The given email is invalid",
+  "globalExceptionOperationNotAllowed": "This operation is not allowed",
+  "globalExceptionTooManyRequests": "Too many requests were made",
+  "globalExceptionUnknownError": "Unknown error",
+  "signInExceptionEmailNotVerified": "Your email is not verified yet",
+  "signInExceptionNetworkError": "A network error has occured",
+  "signInExceptionUserDisabled": "The user is disabled",
+  "signInExceptionUserNotFound": "The given user does not exist",
+  "signInExceptionWrongPassword": "Incorrect password",
+  "signInSuccess": "Successful login",
+  "signUpExceptionEmailAlreadyUsed": "The email is already in use",
+  "signUpExceptionWeakPassword": "The given password is too weak",
+  "signUpSuccess": "Successful registration",
+  "verifyEmailExceptionEmailNotSent": "Verification email could not be sent",
+  "verifyEmailSuccessSent": "Verification email sent",
+  "databaseExceptionPermissionDenied": "Permission denied",
+  "databaseExceptionNoDocument": "The element in demand was not found",
+  "invalidInputEmpty": "Field may not be empty",
+  "invalidInputEmail": "Invalid email address",
+  "invalidInputPassword": "Invalid password",
+  "invalidInputPasswordsNotMatch": "The given passwords do not match",
+  "globalProcessingRequest": "Processing...",
+  "globalEmail": "Email",
+  "globalPassword": "Password",
+  "globalPasswordAgain": "Password again",
+  "globalSignIn": "Sign In",
+  "globalSignUp": "Sign Up",
+  "globalSignOut": "Sign Out",
+  "verifyEmailScreenSendVerify": "Send verification email",
+  "verifyEmailScreenVerifyYourEmail": "Verify your email",
+  "globalBack": "Back",
+  "wrongRouteScreenPageNotFound": "Page not found",
+  "noConnectionScreenConnectionError": "You device is not connected to any network currently. Try connecting to a network through WIFI, Bluetooth or other connections.",
+  "noConnectionScreenInternetError": "You device is unable to reach the Internet.",
+  "noConnectionScreenNoConnection": "No connection",
+  "globalRefresh": "Refresh",
+  "bannedScreenBeingBanned": "User banned",
+  "bannedScreenBeingBannedDescription": "The current user ({email}) is banned from using this application.",
+  "@bannedScreenBeingBannedDescription": {
+    "placeHolders": {
+      "email": {}
+    }
+  },
+  "globalSuccessfulOperation": "Successful operation",
+  "globalUnsuccessfulOperation": "Unsuccessful operation",
+  "globalEdit": "Edit",
+  "settingsScreenPictureModification": "Picture modification",
+  "settingsScreenPictureCamera": "Take picture",
+  "settingsScreenPictureGallery": "Choose from gallery",
+  "settingsScreenPictureReset": "Reset",
+  "globalPublic": "Public",
+  "globalApprove": "Approve",
+  "globalApproveSlide": "Slide to approve",
+  "settingsScreenNameModification": "Name modification",
+  "settingsScreenPictureSetDescription": "This picture will be visible to others",
+  "settingsScreenPictureCantBeUndone": "The modification cannot be undone",
+  "settingsScreenNameSetDescription": "This name will be visible to others",
+  "settingsScreenEmailNotModifiable": "Not modifiable",
+  "settingsScreenPictureReallyModify": "Do you really want to change your profile picture?",
+  "familiesTabXFamily": "{familyName} family",
+  "@familiesTabXFamily": {
+    "description": "Given family name with the word family after",
+    "placeHolders": {
+      "familyName": {
+        "type": "String"
+      }
+    }
+  },
+  "familiesTabFamilies": "Families",
+  "familiesTabInvitations": "Invitations",
+  "familiesTabCreateAddFamily": "Add family",
+  "familiesTabCreateNameOfFamily": "Name of family",
+  "generalAddSlide": "Slide to add",
+  "familiesTabCreatePhotoEdit": "Edit photo",
+  "familiesTabCreatePhotoFamilyPhotoModification": "Family photo modification",
+  "familiesTabCreatePhotoPickInfo": "This photo will be visible to the members of the family and to the users you send an invite",
+  "familiesTabCreatePhotoSetThis": "Set this photo as the family photo?",
+  "familiesTabCreateNameShouldNotBeEmpty": "Name should not be empty",
+  "familiesTabCreateDescriptionOfFamily": "Description",
+  "familiesTabCreateInvitee": "Email of invitee",
+  "globalAdd": "Add",
+  "familiesTabCreateUserAddedOrNull": "This user either is already added to the invites list, or does not exist",
+  "familiesTabCreatePhoto": "Photo",
+  "familiesTabCreateBasics": "Basics",
+  "familiesTabCreateMembers": "Members",
+  "familiesTabCreateInvitedMembers": "Invited users",
+  "familiesTabCreateProcessSaveFamily": "Saving family",
+  "familiesTabCreateProcessSaveOwnerMember": "Adding owner to members",
+  "familiesTabCreateProcessSaveOwnerInvite": "Inviting owner",
+  "familiesTabCreateProcessUploadPhoto": "Uploading photo",
+  "familiesTabCreateProcessSavePhotoUrl": "Linking photo to family",
+  "familiesTabCreateProcessSaveInvites": "Inviting others",
+  "generalDone": "Done",
+  "familiesTabCreateInvitationMessage": "Invitation message",
+  "familiesTabEditModifyFamily": "Modify family",
+  "globalAccept": "Accept",
+  "globalDecline": "Decline",
+  "familiesTabXFamiliesInvitation": "Invitation of {familyName} family",
+  "familiesTabInvitationMessage": "Invitation message",
+  "familiesTabInvitationSender": "Sender",
+  "tasksTabTasks": "Tasks",
+  "tasksCreateNew": "Create new task",
+  "globalDaysMonday": "Monday",
+  "globalDaysSaturday": "Saturday",
+  "globalDaysSunday": "Sunday",
+  "globalDaysThursday": "Thursday",
+  "globalDaysToday": "Today",
+  "globalDaysTuesday": "Tuesday",
+  "globalDaysWednesday": "Wednesday",
+  "globalMonthsApril": "April",
+  "globalMonthsAugust": "August",
+  "globalMonthsDecember": "December",
+  "globalMonthsFebruary": "February",
+  "globalMonthsJanuary": "January",
+  "globalMonthsJuly": "July",
+  "globalMonthsJune": "June",
+  "globalMonthsMarch": "March",
+  "globalMonthsMay": "May",
+  "globalMonthsNovember": "November",
+  "globalMonthsOctober": "October",
+  "globalMonthsSeptember": "September",
+  "tasksTabEditDeadline": "Deadline",
+  "tasksTabEditTitle": "Title",
+  "tasksTabEditPoints": "Points",
+  "globalModifySlide": "Slide to modify",
+  "tasksTabEditAddTask": "Add task",
+  "tasksTabEditModifyTask": "Modify task",
+  "familiesTabManageFamilies": "Manage families",
+  "tasksTabPreviousTasks": "All tasks",
+  "tasksTabEditTaskPhotoModification": "Task photo modification",
+  "tasksTabEditTaskSetThis": "Set this photo as the task photo?",
+  "tasksTabEditTaskModifyTask": "Task modification",
+  "globalMe": "me",
+  "tasksTabEditCreatedAt": "(Assigned at: {date})",
+  "@tasksTabEditCreatedAt": {
+    "placeHolders": {
+      "date": {
+        "type": "string"
+      }
+    }
+  },
+  "tasksTabEditDeadlineMustBeFuture": "Selected deadline must be in the future",
+  "tasksTabDetailsInProgress": "In progress",
+  "tasksTabDetailsAccomplished": "Accomplished",
+  "tasksTabDetailsApproved": "Approved",
+  "tasksTabDetailsNotApproved": "Not approved",
+  "tasksTabDetailsApprove": "Approve",
+  "globalRemoveUser": "Remove from family",
+  "globalDeclareAsParent": "Declare as parent",
+  "globalDeclareAsChild": "Declare as child",
+  "globalTypeParent": "Parent",
+  "globalTypeCreator": "Creator / administrator",
+  "globalTypeChild": "Child",
+  "tasksTabCreateGoal": "Create new goal",
+  "globalDiscardModifications": "Discard modifications",
+  "goalDetailsAdd": "Add goal",
+  "goalDetailsEditGoal": "Modify goal",
+  "goalDetailsCreatedAt": "(Created at: {date})",
+  "@goalDetailsCreatedAt": {
+    "placeHolders": {
+      "date": {
+        "type": "string"
+      }
+    }
+  },
+  "tasksTabGoals": "Goals",
+  "tasksTabPreviousGoals": "All goals",
+  "tasksTabNotEnoughPointsToDisapprove": "User does not have enough point to remove approval and subtract points.",
+  "tasksTabGoalsYouAchieved": "You achieved your goal, now you can claim it, by trading in your points.",
+  "tasksTabGoalsTradePoints": "Redeem points",
+  "tasksTabGoalsApprove": "Approve",
+  "tasksTabGoalsApproveDescription": "This goal has been claimed, now you can approve it.",
+  "profileTabNotifications": "Notifications",
+  "profileTabNotificationsDescription": "If you turn this switch on you will receive notifications about all kinds of events (i.e.: new tasks, approvals, ...)",
+  "globalSuccessPasswordChangeComplete": "Password change complete",
+  "profileChangePassword": "Change password",
+  "profileTabOldPassword": "Old password",
+  "tasksTabXPoints": "{points} points",
+  "@tasksTabXPoints": {
+    "placeHolders": {
+      "points": {}
+    }
+  },
+  "tasksTabXTasks": "{tasks} tasks",
+  "@tasksTabXTasks": {
+    "placeHolders": {
+      "tasks": {}
+    }
+  },
+  "tasksTabXFinished": "{tasks} finished",
+  "@tasksTabXFinished": {
+    "placeHolders": {
+      "tasks": {}
+    }
+  },
+  "tasksTabXGoals": "{goals} goals",
+  "@tasksTabXGoals": {
+    "placeHolders": {
+      "goals": {}
+    }
+  },
+  "tasksTabXAchieved": "{goals} achieved goals",
+  "@tasksTabXAchieved": {
+    "placeHolders": {
+      "goals": {}
+    }
+  },
+  "signInScreenForgotPassword": "Forgot password?",
+  "globalDelete": "Delete"
+}

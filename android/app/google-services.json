@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "51045257045",
+    "project_id": "living-room-9bcc0",
+    "storage_bucket": "living-room-9bcc0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:51045257045:android:b2f0ab9a94f64ffa5da9dc",
+        "android_client_info": {
+          "package_name": "com.mvida.living_room"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACXcr9X5SCqeogugcxQeZ5ChyM-SFE1Y0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
