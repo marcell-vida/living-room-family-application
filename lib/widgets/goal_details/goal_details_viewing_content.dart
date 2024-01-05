@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:living_room/extension/dart/context_extension.dart';
+import 'package:living_room/extension/dart/datetime_extension.dart';
 import 'package:living_room/model/database/families/family_member_goal.dart';
 import 'package:living_room/state/screen/app_base/app_base_cubit.dart';
 import 'package:living_room/state/sheet/family/goal_details_bloc.dart';
 import 'package:living_room/util/constants.dart';
 import 'package:living_room/widgets/default/default_avatar.dart';
 import 'package:living_room/widgets/default/default_button.dart';
-import 'package:living_room/widgets/default/default_check_box.dart';
 import 'package:living_room/widgets/default/default_container.dart';
 import 'package:living_room/widgets/default/default_text.dart';
 import 'package:living_room/widgets/general/general_padding.dart';
 import 'package:living_room/widgets/spacers.dart';
-import 'package:living_room/extension/dart/datetime_extension.dart';
 import 'package:square_percent_indicater/square_percent_indicater.dart';
 
 class GoalDetailsViewingContent extends StatelessWidget {
@@ -92,7 +91,8 @@ class GoalDetailsViewingContent extends StatelessWidget {
 
       GeneralPadding(children: [
         /// progress
-        if (progressValue < 1 && !isAchieved && !isApproved) _progressSection(context, goal, progressValue),
+        if (progressValue < 1 && !isAchieved && !isApproved)
+          _progressSection(context, goal, progressValue),
 
         /// enough points, can be claimed
         if (progressValue >= 1 && !isAchieved) ..._claimSection(context),
@@ -123,12 +123,14 @@ class GoalDetailsViewingContent extends StatelessWidget {
       ]),
 
       /// edit button
-      DefaultButton(
-          text: context.loc?.globalEdit,
-          callback: () {
-            onEdit?.call();
-          }),
-      const VerticalSpacer.of40(),
+      if (!isApproved) ...[
+        DefaultButton(
+            text: context.loc?.globalEdit,
+            callback: () {
+              onEdit?.call();
+            }),
+        const VerticalSpacer.of40()
+      ],
 
       /// created at
       DefaultText(
@@ -223,21 +225,6 @@ class GoalDetailsViewingContent extends StatelessWidget {
         ),
       ),
     );
-    // return <Widget>[
-    //   LinearProgressIndicator(
-    //     value: progressValue,
-    //     backgroundColor: AppColors.sand,
-    //     color: AppColors.green,
-    //   ),
-    //   const VerticalSpacer.of10(),
-    //   Center(
-    //     child: DefaultText(
-    //       '${goalDetailsCubit.state.familyMember?.pointsCollected ?? 0}/${goal?.points ?? 0}',
-    //       fontSize: 20,
-    //       color: AppColors.green,
-    //     ),
-    //   ),
-    // ];
   }
 
   Widget _approvedSection(BuildContext context) {

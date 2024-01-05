@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:living_room/extension/dart/context_extension.dart';
 
-extension DateTimeExtension on DateTime{
+extension DateTimeExtension on DateTime {
   bool get isDateInThePast {
     DateTime current = DateTime(year, month, day);
-    DateTime now = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
+    DateTime now =
+        DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
     return current.compareTo(now) < 0;
   }
 
@@ -17,13 +18,14 @@ extension DateTimeExtension on DateTime{
     return isAfter(DateTime.now());
   }
 
-  bool get isInTheFutureAtLeastFiveSeconds{
+  bool get isInTheFutureAtLeastFiveSeconds {
     return isAfter(DateTime.now().add(const Duration(seconds: 5)));
   }
 
   bool get isDateInTheFuture {
     DateTime current = DateTime(year, month, day);
-    DateTime now = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
+    DateTime now =
+        DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
     return current.compareTo(now) > 0;
   }
 
@@ -44,6 +46,17 @@ extension DateTimeExtension on DateTime{
         ', $toHHmm';
   }
 
+  String get toMMdd {
+    String result = '';
+
+    if (month < 10) result += '0';
+
+    result += '$month.';
+
+    if (day < 10) result += '0';
+
+    return result + day.toString();
+  }
 
   String? weekdayByName(BuildContext context) {
     switch (weekday) {

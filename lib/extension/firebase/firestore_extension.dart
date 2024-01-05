@@ -3,7 +3,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 extension MyQuerySnapshot on QuerySnapshot<Object?> {
   Map<DocumentReference, Map<String, dynamic>>? data() {
     try {
-      return {for (var v in docs) v.reference: (v.data() as Map).cast<String, dynamic>()};
+      return {
+        for (var v in docs)
+          v.reference: (v.data() as Map).cast<String, dynamic>()
+      };
     } catch (e) {
       return null;
     }

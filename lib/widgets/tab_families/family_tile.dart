@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:living_room/extension/dart/context_extension.dart';
@@ -8,7 +9,6 @@ import 'package:living_room/util/constants.dart';
 import 'package:living_room/util/general_family_editor.dart';
 import 'package:living_room/widgets/default/default_avatar.dart';
 import 'package:living_room/widgets/default/default_button.dart';
-import 'package:living_room/widgets/default/default_container.dart';
 import 'package:living_room/widgets/default/default_expansion_tile.dart';
 import 'package:living_room/widgets/default/default_text.dart';
 import 'package:living_room/widgets/general/list_item_with_picture_icon.dart';
@@ -42,6 +42,11 @@ class FamilyTile extends StatelessWidget {
       BuildContext context, FamilyState state, FamilyCubit cubit) {
     String description = familyCubit.state.family?.description ?? '';
 
+    String userId = context.cubits.base.getCurrentAuthUser?.uid ?? '';
+    MemberCubit? signedInUser = cubit.memberCubits
+        .firstWhereOrNull((element) => element.userId == userId);
+    bool isUserParent = signedInUser?.state.member?.isParent == true;
+
     return <Widget>[
       if (description.isNotEmpty) ...[
         Align(
@@ -72,10 +77,12 @@ class FamilyTile extends StatelessWidget {
               }),
           const VerticalSpacer.of10()
         ],
-      const VerticalSpacer.of20(),
-      DefaultButton(
-          text: context.loc?.globalEdit,
-          callback: () => _onModify(context, cubit))
+      if (isUserParent) ...[
+        const VerticalSpacer.of20(),
+        DefaultButton(
+            text: context.loc?.globalEdit,
+            callback: () => _onModify(context, cubit))
+      ]
     ];
   }
 

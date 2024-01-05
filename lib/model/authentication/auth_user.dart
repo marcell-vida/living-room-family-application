@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
-class AuthUser{
+class AuthUser {
   String? uid;
   String? email;
   String? displayName;
@@ -8,9 +8,15 @@ class AuthUser{
   bool? isEmailVerified;
   DateTime? creationTime;
 
-  AuthUser({this.email, this.displayName, this.photoURL, this.isEmailVerified, this.uid}): creationTime = DateTime.now();
+  AuthUser(
+      {this.email,
+      this.displayName,
+      this.photoURL,
+      this.isEmailVerified,
+      this.uid})
+      : creationTime = DateTime.now();
 
-  AuthUser.fromFirebase(User user){
+  AuthUser.fromFirebase(User user) {
     email = user.email;
     displayName = user.displayName;
     isEmailVerified = user.emailVerified;
@@ -20,6 +26,7 @@ class AuthUser{
   }
 
   bool get isNewlyRegistered => creationTime != null
-      ? DateTime.now().difference(creationTime!.toLocal()) < const Duration(milliseconds: 2000)
+      ? DateTime.now().difference(creationTime!.toLocal()) <
+          const Duration(milliseconds: 2000)
       : false;
 }

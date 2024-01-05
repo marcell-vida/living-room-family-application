@@ -1,7 +1,9 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:living_room/extension/dart/context_extension.dart';
 import 'package:living_room/service/authentication/authentication_service.dart';
@@ -13,21 +15,18 @@ import 'package:living_room/state/screen/app_base/app_base_cubit.dart';
 import 'package:living_room/util/constants.dart';
 import 'package:living_room/util/navigator.dart';
 import 'package:logger/logger.dart';
+
 import 'firebase_options.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 /// package to log general events
 Logger log = Logger(
-  printer: PrettyPrinter(
-    methodCount: 2,
-    errorMethodCount: 8,
-    lineLength: 40,
-    colors: true,
-    printEmojis: true,
-    printTime: true
-  )
-);
+    printer: PrettyPrinter(
+        methodCount: 5,
+        errorMethodCount: 8,
+        lineLength: 40,
+        colors: true,
+        printEmojis: true,
+        printTime: true));
 
 String? appOpenedByNotificationKey;
 
@@ -45,8 +44,7 @@ Future<void> main() async {
   await MessagingService().initNotifications(onClicked: _handleNotification);
   RemoteMessage? initialMessage = await MessagingService().getInitialMessage();
   if (initialMessage != null) {
-    _handleNotification(
-        initialMessage.data['id']);
+    _handleNotification(initialMessage.data['id']);
   }
 
   runApp(const MyApp());
@@ -70,13 +68,11 @@ class MyApp extends StatelessWidget {
           providers: [
             BlocProvider<AppBaseCubit>(
                 create: (context) => AppBaseCubit(
-                    authenticationService:
-                        context.services.authentication,
-                    databaseService:
-                        context.services.database,
-                messagingService: context.services.messaging)),
+                    authenticationService: context.services.authentication,
+                    databaseService: context.services.database,
+                    messagingService: context.services.messaging)),
             BlocProvider<NavigatorBarCubit>(
-                create: (context) => NavigatorBarCubit())
+                create: (context) => NavigatorBarCubit()),
           ],
           child: Builder(builder: (context) {
             return MaterialApp(
@@ -85,7 +81,7 @@ class MyApp extends StatelessWidget {
               initialRoute: AppRoutes.loading,
               title: AppLocalizations.of(context)?.appName ?? '',
               localizationsDelegates: const [
-                AppLocalizations.delegate, // Add this line
+                AppLocalizations.delegate,
                 GlobalMaterialLocalizations.delegate,
                 GlobalWidgetsLocalizations.delegate,
                 GlobalCupertinoLocalizations.delegate,

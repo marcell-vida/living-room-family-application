@@ -188,7 +188,7 @@ class GoalDetailsCubit extends Cubit<GoalDetailsState> {
   void approve() {
     if (state.saveStatus == ProcessStatus.processing ||
         state.existingGoal?.isApproved == true ||
-    state.existingGoal?.isAchieved != true) return;
+        state.existingGoal?.isAchieved != true) return;
 
     _setStatus(ProcessStatus.processing);
 

@@ -44,8 +44,7 @@ class ProfileSettingsTile extends StatelessWidget {
             radius: 70,
             showInitialTextAbovePicture: true,
             foregroundColor: AppColors.purple.withOpacity(0.2),
-            initialsText:
-                '\n\n\n\n\n${context.loc?.globalEdit}\n✎',
+            initialsText: '\n\n\n\n\n${context.loc?.globalEdit}\n✎',
             onTap: () => _onPictureTap(context),
           );
         });
@@ -107,16 +106,17 @@ class ProfileSettingsTile extends StatelessWidget {
     }
 
     GeneralImagePicker(
-      context: context,
-      pickSheetTitle: context.loc?.settingsScreenPictureModification,
-      approveSheetTitle: context.loc?.settingsScreenPictureModification,
-      approveSheetDescription: context.loc?.settingsScreenPictureReallyModify,
-      pickSheetInfo: context.loc?.settingsScreenPictureSetDescription,
-      approveSheetInfo: context.loc?.settingsScreenPictureCantBeUndone,
-      currentUrl: context.states.base.currentDbUser?.photoUrl,
-      onChooseDone: onModificationDone,
-      onApprovalDone: onApprovalDone
-    ).show();
+            context: context,
+            pickSheetTitle: context.loc?.settingsScreenPictureModification,
+            approveSheetTitle: context.loc?.settingsScreenPictureModification,
+            approveSheetDescription:
+                context.loc?.settingsScreenPictureReallyModify,
+            pickSheetInfo: context.loc?.settingsScreenPictureSetDescription,
+            approveSheetInfo: context.loc?.settingsScreenPictureCantBeUndone,
+            currentUrl: context.states.base.currentDbUser?.photoUrl,
+            onChooseDone: onModificationDone,
+            onApprovalDone: onApprovalDone)
+        .show();
   }
 
   void _showNameModifierSheet(

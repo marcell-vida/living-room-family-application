@@ -12,28 +12,28 @@ class VerifyEmailState extends Equatable {
 
   const VerifyEmailState(
       {this.successMessage,
-        this.countdownSeconds,
-        this.verifyEmailStatus,
-        this.verifyEmailExceptions});
+      this.countdownSeconds,
+      this.verifyEmailStatus,
+      this.verifyEmailExceptions});
 
   VerifyEmailState copyWith(
       {VerifyEmailStatus? verifyEmailStatus,
-        int? countdownSeconds,
-        VerifyEmailException? verifyEmailExceptions,
-        SuccessMessage? successMessage}) {
+      int? countdownSeconds,
+      VerifyEmailException? verifyEmailExceptions,
+      SuccessMessage? successMessage}) {
     return VerifyEmailState(
         verifyEmailStatus: verifyEmailStatus ?? this.verifyEmailStatus,
         countdownSeconds: countdownSeconds,
         verifyEmailExceptions:
-        verifyEmailExceptions ?? this.verifyEmailExceptions,
+            verifyEmailExceptions ?? this.verifyEmailExceptions,
         successMessage: successMessage ?? this.successMessage);
   }
 
   @override
   List<Object?> get props => [
-    verifyEmailStatus,
-    countdownSeconds,
-    verifyEmailExceptions,
-    successMessage
-  ];
+        verifyEmailStatus,
+        countdownSeconds,
+        verifyEmailExceptions,
+        successMessage
+      ];
 }

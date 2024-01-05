@@ -7,26 +7,27 @@ import 'package:living_room/service/messaging/messaging_service.dart';
 import 'package:living_room/service/storage/storage_service.dart';
 import 'package:living_room/state/app/family_selector_bloc.dart';
 import 'package:living_room/state/app/navigator_bar_bloc.dart';
-import 'package:living_room/state/screen/profile/notification_settings_bloc.dart';
-import 'package:living_room/state/screen/profile/password_settings_bloc.dart';
-import 'package:living_room/state/sheet/family/edit_family_bloc.dart';
-import 'package:living_room/state/sheet/family/goal_details_bloc.dart';
-import 'package:living_room/state/sheet/family/task_details_bloc.dart';
-import 'package:living_room/state/sheet/temp_bottom_sheet_cubit.dart';
-import 'package:living_room/state/sheet/family/unaccepted_invitation_bloc.dart';
 import 'package:living_room/state/object/families_bloc.dart';
 import 'package:living_room/state/object/family_bloc.dart';
-import 'package:living_room/state/sheet/profile/profile_name_bloc.dart';
-import 'package:living_room/state/sheet/profile/profile_picture_bloc.dart';
 import 'package:living_room/state/object/task_bloc.dart';
+import 'package:living_room/state/screen/app_base/app_base_cubit.dart';
+import 'package:living_room/state/screen/app_base/app_base_state.dart';
+import 'package:living_room/state/screen/profile/notification_settings_bloc.dart';
+import 'package:living_room/state/screen/profile/password_settings_bloc.dart';
 import 'package:living_room/state/screen/sign_in/sign_in_cubit.dart';
 import 'package:living_room/state/screen/sign_in/sign_in_state.dart';
 import 'package:living_room/state/screen/sign_up/sign_up_cubit.dart';
 import 'package:living_room/state/screen/sign_up/sign_up_state.dart';
+import 'package:living_room/state/screen/stats/stats_bloc.dart';
 import 'package:living_room/state/screen/verify_email/verify_email_cubit.dart';
 import 'package:living_room/state/screen/verify_email/verify_email_state.dart';
-import 'package:living_room/state/screen/app_base/app_base_cubit.dart';
-import 'package:living_room/state/screen/app_base/app_base_state.dart';
+import 'package:living_room/state/sheet/family/edit_family_bloc.dart';
+import 'package:living_room/state/sheet/family/goal_details_bloc.dart';
+import 'package:living_room/state/sheet/family/task_details_bloc.dart';
+import 'package:living_room/state/sheet/family/unaccepted_invitation_bloc.dart';
+import 'package:living_room/state/sheet/profile/profile_name_bloc.dart';
+import 'package:living_room/state/sheet/profile/profile_picture_bloc.dart';
+import 'package:living_room/state/sheet/temp_bottom_sheet_cubit.dart';
 import 'package:living_room/util/constants.dart';
 import 'package:living_room/widgets/default/default_text.dart';
 import 'package:living_room/widgets/general/clickable_icon.dart';
@@ -100,10 +101,7 @@ extension ContextExtension on BuildContext {
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(
-                              right: 20,
-                              left: 20,
-                              top: 20,
-                              bottom: 20),
+                              right: 20, left: 20, top: 20, bottom: 20),
                           child: ScrollConfiguration(
                               behavior: NoOverscrollIndicatorBehavior(),
                               child: SingleChildScrollView(
@@ -142,8 +140,7 @@ extension ContextExtension on BuildContext {
             return Container(
               margin: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                  borderRadius: Constants.borderRadius,
-                  color: AppColors.white),
+                  borderRadius: Constants.borderRadius, color: AppColors.white),
               child: Stack(
                 children: [
                   Padding(
@@ -223,13 +220,18 @@ class AppCubits {
 
   FamilyTaskCubit get task => context.read<FamilyTaskCubit>();
 
-  UnacceptedInvitationCubit get unacceptedInvite => context.read<UnacceptedInvitationCubit>();
+  UnacceptedInvitationCubit get unacceptedInvite =>
+      context.read<UnacceptedInvitationCubit>();
 
   FamilySelectorCubit get familySelector => context.read<FamilySelectorCubit>();
 
-  NotificationSettingsCubit get notificationSettings => context.read<NotificationSettingsCubit>();
+  NotificationSettingsCubit get notificationSettings =>
+      context.read<NotificationSettingsCubit>();
 
-  PasswordSettingsCubit get passwordSettings => context.read<PasswordSettingsCubit>();
+  PasswordSettingsCubit get passwordSettings =>
+      context.read<PasswordSettingsCubit>();
+
+  StatsCubit get stats => context.read<StatsCubit>();
 }
 
 class AppStates {
@@ -261,14 +263,19 @@ class AppStates {
 
   FamilyState get family => context.read<FamilyCubit>().state;
 
-  UnacceptedInvitationState get unacceptedInvite => context.read<UnacceptedInvitationCubit>().state;
+  UnacceptedInvitationState get unacceptedInvite =>
+      context.read<UnacceptedInvitationCubit>().state;
 
-  FamilySelectorState get familySelector => context.read<FamilySelectorCubit>().state;
+  FamilySelectorState get familySelector =>
+      context.read<FamilySelectorCubit>().state;
 
-  NotificationSettingsState get notificationSettings => context.read<NotificationSettingsCubit>().state;
+  NotificationSettingsState get notificationSettings =>
+      context.read<NotificationSettingsCubit>().state;
 
-  PasswordSettingsState get passwordSettings => context.read<PasswordSettingsCubit>().state;
+  PasswordSettingsState get passwordSettings =>
+      context.read<PasswordSettingsCubit>().state;
 
+  StatsState get stats => context.read<StatsCubit>().state;
 }
 
 class AppServices {
@@ -284,5 +291,6 @@ class AppServices {
 
   StorageService get storage => RepositoryProvider.of<StorageService>(context);
 
-  MessagingService get messaging => RepositoryProvider.of<MessagingService>(context);
+  MessagingService get messaging =>
+      RepositoryProvider.of<MessagingService>(context);
 }

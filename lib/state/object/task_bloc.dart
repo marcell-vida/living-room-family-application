@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:living_room/main.dart';
 import 'package:living_room/model/database/families/family_member_task.dart';
 import 'package:living_room/service/database/database_service.dart';
 
@@ -38,8 +37,6 @@ class FamilyTaskCubit extends Cubit<FamilyTaskState> {
 
   void _update(FamilyMemberTask? newTask) {
     emit(state.copyWith(task: newTask));
-    log.d('TaskCubit: state.task?.title == ${state.task?.title}, '
-        'state.task?.isFinished == ${state.task?.isFinished}');
   }
 
   @override

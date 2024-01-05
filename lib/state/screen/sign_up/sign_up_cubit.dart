@@ -43,7 +43,7 @@ class SignUpCubit extends Cubit<SignUpState> {
         passwordAgain: newValue, signUpStatus: ProcessStatus.idle));
   }
 
-  void validate(){
+  void validate() {
     /// email
     bool isEmailValid = Utils.isEmailFormatValid(state.email);
     InvalidInput? invalidEmailMessage;
@@ -65,8 +65,10 @@ class SignUpCubit extends Cubit<SignUpState> {
     }
 
     /// password again
-    bool isPasswordAgainValid = Utils.isPasswordFormatValid(state.passwordAgain);
-    InvalidInput? invalidPasswordAgainMessage = state.invalidPasswordAgainMessage;
+    bool isPasswordAgainValid =
+        Utils.isPasswordFormatValid(state.passwordAgain);
+    InvalidInput? invalidPasswordAgainMessage =
+        state.invalidPasswordAgainMessage;
 
     if (state.passwordAgain.isEmpty) {
       invalidPasswordAgainMessage = InvalidInput.emptyInput;

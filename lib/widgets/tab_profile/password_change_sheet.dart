@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:living_room/extension/dart/context_extension.dart';
+import 'package:living_room/extension/result/invalid_input_extension.dart';
 import 'package:living_room/state/screen/profile/password_settings_bloc.dart';
 import 'package:living_room/util/constants.dart';
 import 'package:living_room/util/utils.dart';
@@ -9,7 +10,6 @@ import 'package:living_room/widgets/default/default_input_field.dart';
 import 'package:living_room/widgets/default/default_slider.dart';
 import 'package:living_room/widgets/default/default_text.dart';
 import 'package:living_room/widgets/spacers.dart';
-import 'package:living_room/extension/result/invalid_input_extension.dart';
 
 class PasswordChangeSheet extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -29,11 +29,14 @@ class PasswordChangeSheet extends StatelessWidget {
               return const CircularProgressIndicator(
                 color: AppColors.purple,
               );
-            }
-            else if(state.saveStatus == ProcessStatus.successful){
+            } else if (state.saveStatus == ProcessStatus.successful) {
               return Column(
                 children: [
-                  const Icon(Icons.check_circle, color: AppColors.green, size: 50,),
+                  const Icon(
+                    Icons.check_circle,
+                    color: AppColors.green,
+                    size: 50,
+                  ),
                   const VerticalSpacer.of10(),
                   DefaultText(
                     context.loc?.globalSuccessfulOperation ?? '',
@@ -45,11 +48,14 @@ class PasswordChangeSheet extends StatelessWidget {
                       callback: () => context.navigator.pop())
                 ],
               );
-            }
-            else if(state.saveStatus == ProcessStatus.unsuccessful){
+            } else if (state.saveStatus == ProcessStatus.unsuccessful) {
               return Column(
                 children: [
-                  const Icon(Icons.error_outline, color: AppColors.red, size: 50,),
+                  const Icon(
+                    Icons.error_outline,
+                    color: AppColors.red,
+                    size: 50,
+                  ),
                   const VerticalSpacer.of10(),
                   DefaultText(
                     context.loc?.globalUnsuccessfulOperation ?? '',

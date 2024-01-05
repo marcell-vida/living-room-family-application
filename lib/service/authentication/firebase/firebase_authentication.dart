@@ -168,7 +168,6 @@ class AuthenticationImp extends AuthenticationBase {
       _firebaseAuth.currentUser?.updatePassword(newPassword).then(
         (value) => onSuccess?.call(SuccessMessage.passwordChangeComplete),
         onError: (error) {
-          log.d('Change password error: ${error.toString()}');
           onError?.call();
         },
       );

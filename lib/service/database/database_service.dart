@@ -1,6 +1,5 @@
 import 'dart:core';
 
-import 'package:living_room/main.dart';
 import 'package:living_room/model/authentication/auth_user.dart';
 import 'package:living_room/model/database/base/firestore_item.dart';
 import 'package:living_room/model/database/families/family.dart';
@@ -81,15 +80,14 @@ class DatabaseService {
 
   Future<void> changeCurrentUserGeneralNotifications(
       {required AuthenticationService authenticationService,
-        required bool notifications,
-        void Function()? onSuccess,
-        void Function()? onError}) async {
+      required bool notifications,
+      void Function()? onSuccess,
+      void Function()? onError}) async {
     var currentUserId = authenticationService.currentUser?.uid;
     if (currentUserId != null) {
       await _database.setDocumentFields("$userCollectionPath/$currentUserId",
           {userDocumentGeneralNotificationsField: notifications},
-          onSuccess: onSuccess,
-      onError: onError);
+          onSuccess: onSuccess, onError: onError);
     }
   }
 
@@ -437,6 +435,7 @@ class DatabaseService {
   Future<FamilyMemberTask?> createFamilyMemberTask(
       {required String familyUid,
       required String userUid,
+      required AuthenticationService authenticationService,
       String? title,
       String? description,
       String? taskPhotoUrl,
@@ -444,6 +443,13 @@ class DatabaseService {
       int? points,
       void Function()? onSuccess,
       void Function()? onError}) async {
+    String? creatorId = authenticationService.currentUser?.uid;
+
+    if (creatorId == null) {
+      onError?.call();
+      return null;
+    }
+
     FamilyMemberTask task = FamilyMemberTask(
         title: title,
         familyId: familyUid,
@@ -452,6 +458,7 @@ class DatabaseService {
         taskPhotoUrl: taskPhotoUrl,
         points: points,
         deadline: deadLine,
+        userCreated: creatorId,
         createdAt: DateTime.now());
 
     return await saveItem<FamilyMemberTask>(firestoreItem: task);
@@ -521,11 +528,10 @@ class DatabaseService {
       AuthenticationService? authenticationService,
       void Function()? onSuccess,
       void Function()? onError}) async {
-    log.d('changeFinishStatusOfFamilyMemberTask: change to $approved');
-
     String? approverId;
-    if (authenticationService != null)
+    if (authenticationService != null) {
       approverId = authenticationService.currentUser?.uid;
+    }
 
     await _database.setDocumentFields(
         "${familyMemberTaskCollectionPath(familyUid, userUid)}/$taskUid",

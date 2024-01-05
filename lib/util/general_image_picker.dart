@@ -91,7 +91,8 @@ class GeneralImagePicker {
         const VerticalSpacer.of40(),
       ],
       if (currentUrl == null &&
-          currentPath != null && currentPath!.isNotEmpty) ...[
+          currentPath != null &&
+          currentPath!.isNotEmpty) ...[
         Center(
           child: DefaultAvatar(
             radius: 130,
@@ -157,7 +158,6 @@ class GeneralImagePicker {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Wrap(
-            // mainAxisAlignment: MainAxisAlignment.center,
             children: [
               if (currentUrl != null) ...[
                 DefaultAvatar(
@@ -167,7 +167,8 @@ class GeneralImagePicker {
                 const HorizontalSpacer.of10(),
               ],
               if (currentUrl == null &&
-                  currentPath != null && currentPath!.isNotEmpty) ...[
+                  currentPath != null &&
+                  currentPath!.isNotEmpty) ...[
                 DefaultAvatar(
                   borderColor: AppColors.sand,
                   child: Image.file(

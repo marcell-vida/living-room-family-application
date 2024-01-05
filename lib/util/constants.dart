@@ -11,7 +11,7 @@ class Constants {
       'https://firebasestorage.googleapis.com/v0/b/living-room-9bcc0.appspot.com/o/app%2FNappali_detailed.png?alt=media&token=a907ac2c-c987-4792-afda-9c6c8296a06a';
 }
 
-class AppImages{
+class AppImages {
   static get appIcon => 'assets/images/app_icon.png';
 }
 
@@ -36,6 +36,7 @@ class AppPaddings {
 
 class AppColors {
   static const Color blue = Color(0xFF0b84a5);
+  static const Color lightBlue = Color(0xFFc0eefb);
   static const Color sand = Color(0xFFf6c85f);
   static const Color purple = Color(0xFF6f4e7c);
   static const Color purple50 = Color(0xFFbaa0c4);

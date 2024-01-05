@@ -10,8 +10,10 @@ import 'package:living_room/widgets/spacers.dart';
 
 class MemberDetails extends StatelessWidget {
   final MemberCubit memberCubit;
+  final MemberCubit? signedInMember;
 
-  const MemberDetails({super.key, required this.memberCubit});
+  const MemberDetails(
+      {super.key, required this.memberCubit, this.signedInMember});
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +63,16 @@ class MemberDetails extends StatelessWidget {
         textAlign: TextAlign.center,
       ),
 
+      if (signedInMember?.userId == memberCubit.userId) ...[
+        const VerticalSpacer.of10(),
+        DefaultText(
+          blocContext.loc?.globalMe ?? '',
+          color: AppColors.blue,
+          fontSize: 18,
+        ),
+        const VerticalSpacer.of10(),
+      ],
+
       /// type
       DefaultText(
         type,
@@ -78,14 +90,15 @@ class MemberDetails extends StatelessWidget {
       const VerticalSpacer.of60(),
 
       /// buttons to remove and upgrade members
-      // todo show only if user is administrator
-      if (state.member?.isCreator == true) ...[
-        DefaultButton(
-            text: blocContext.loc?.globalDeclareAsParent,
-            color: AppColors.sand,
-            callback: () {
-              //todo
-            }),
+      if (signedInMember?.state.member?.isCreator == true &&
+          signedInMember?.userId != memberCubit.userId) ...[
+        if (memberCubit.state.member?.isParent != true)
+          DefaultButton(
+              text: blocContext.loc?.globalDeclareAsParent,
+              color: AppColors.sand,
+              callback: () {
+                //todo
+              }),
         const VerticalSpacer.of20(),
         DefaultButton(
             color: AppColors.red,

@@ -36,7 +36,7 @@ class LoadingSwitch extends StatelessWidget {
     } else {
       result = Switch(
         value: switchState ?? false,
-        onChanged: onChanged ?? (_){},
+        onChanged: onChanged ?? (_) {},
         activeColor: AppColors.white,
         inactiveThumbColor: AppColors.white,
         inactiveTrackColor: AppColors.grey3,

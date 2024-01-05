@@ -61,18 +61,18 @@ class DefaultInputField extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
         child: Theme(
-          data: Theme.of(context).copyWith(textSelectionTheme: TextSelectionThemeData(
-            cursorColor: textColor,
-            selectionColor: textColor,
-            selectionHandleColor: textColor
-          )),
-          child: TextFormField(
-      controller: textEditingController,
-      cursorColor: textColor,
-      initialValue: initialValue,
-      onChanged: callback,
-      onFieldSubmitted: callback,
-      validator: (input) {
+      data: Theme.of(context).copyWith(
+          textSelectionTheme: TextSelectionThemeData(
+              cursorColor: textColor,
+              selectionColor: textColor,
+              selectionHandleColor: textColor)),
+      child: TextFormField(
+        controller: textEditingController,
+        cursorColor: textColor,
+        initialValue: initialValue,
+        onChanged: callback,
+        onFieldSubmitted: callback,
+        validator: (input) {
           if (validator != null && validator!() == false) {
             return validatorMessage != null
                 ? validatorMessage!()
@@ -80,18 +80,18 @@ class DefaultInputField extends StatelessWidget {
           } else {
             return null;
           }
-      },
-      minLines: minLines,
-      maxLines: maxLines ?? minLines,
-      keyboardType: textInputType,
-      inputFormatters: [
+        },
+        minLines: minLines,
+        maxLines: maxLines ?? minLines,
+        keyboardType: textInputType,
+        inputFormatters: [
           LengthLimitingTextInputFormatter(maxLength),
           if (textInputFormatter != null) textInputFormatter!
-      ],
-      textInputAction: textInputAction,
-      obscureText: obscureText == true,
-      style: TextStyle(color: textColor),
-      decoration: InputDecoration(
+        ],
+        textInputAction: textInputAction,
+        obscureText: obscureText == true,
+        style: TextStyle(color: textColor),
+        decoration: InputDecoration(
             errorBorder: OutlineInputBorder(
               borderRadius: Constants.borderRadius,
               borderSide: BorderSide(
@@ -124,10 +124,11 @@ class DefaultInputField extends StatelessWidget {
                 color: AppColors.red),
             suffixIcon: suffix,
             prefixIcon: leadIcon != null
-                ? Icon(leadIcon, color: defaultBorderColor ?? AppColors.whiteOp30)
+                ? Icon(leadIcon,
+                    color: defaultBorderColor ?? AppColors.whiteOp30)
                 : null),
-    ),
-        ));
+      ),
+    ));
   }
 
   Widget? get suffix {

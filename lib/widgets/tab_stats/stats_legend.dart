@@ -9,6 +9,7 @@ class StatsLegend extends StatelessWidget {
     required this.name,
     required this.color,
   });
+
   final String name;
   final Color color;
 
@@ -42,6 +43,7 @@ class LegendsListWidget extends StatelessWidget {
     super.key,
     required this.legends,
   });
+
   final List<Legend> legends;
 
   @override
@@ -52,10 +54,10 @@ class LegendsListWidget extends StatelessWidget {
       children: legends
           .map(
             (e) => StatsLegend(
-          name: e.name,
-          color: e.color,
-        ),
-      )
+              name: e.name,
+              color: e.color,
+            ),
+          )
           .toList(),
     );
   }
@@ -63,6 +65,7 @@ class LegendsListWidget extends StatelessWidget {
 
 class Legend {
   Legend(this.name, this.color);
+
   final String name;
   final Color color;
 }

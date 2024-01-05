@@ -32,17 +32,19 @@ class FlatActionChip extends StatelessWidget {
       this.endIconColor = AppColors.purple});
 
   MainAxisAlignment get alignment {
-    if(textAlign == TextAlign.start) {
+    if (textAlign == TextAlign.start) {
       return MainAxisAlignment.start;
-    } else if(textAlign == TextAlign.center) {
+    } else if (textAlign == TextAlign.center) {
       return MainAxisAlignment.center;
-    }    else {
+    } else {
       return MainAxisAlignment.end;
-    }  }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Row(mainAxisAlignment: alignment,
+    return Row(
+      mainAxisAlignment: alignment,
       children: [
         if (leadIcon != null)
           GestureDetector(
@@ -55,8 +57,7 @@ class FlatActionChip extends StatelessWidget {
           ),
         if (text != null)
           Padding(
-            padding:
-            EdgeInsets.symmetric(horizontal: paddingBetween),
+            padding: EdgeInsets.symmetric(horizontal: paddingBetween),
             child: DefaultTextButton(
                 text: text,
                 textAlign: textAlign,
@@ -70,49 +71,6 @@ class FlatActionChip extends StatelessWidget {
             child: Icon(
               endIcon,
               color: endIconColor,
-            ),
-          ),
-      ],
-    );
-
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        if (leadIcon != null)
-          Align(
-            alignment: Alignment.centerLeft,
-            child: GestureDetector(
-              onTap: leadIconTap ?? onGeneralTap,
-              child: Icon(
-                leadIcon,
-                size: fontSize,
-                color: leadIconColor,
-              ),
-            ),
-          ),
-        if (text != null)
-          Align(
-            alignment: Alignment.center,
-            child: Padding(
-              padding:
-                  EdgeInsets.symmetric(horizontal: fontSize + paddingBetween),
-              child: DefaultTextButton(
-                  text: text,
-                  textAlign: textAlign,
-                  textColor: textColor,
-                  fontSize: fontSize,
-                  onPressed: onGeneralTap),
-            ),
-          ),
-        if (endIcon != null)
-          Align(
-            alignment: Alignment.centerRight,
-            child: GestureDetector(
-              onTap: endIconTap ?? onGeneralTap,
-              child: Icon(
-                endIcon,
-                color: endIconColor,
-              ),
             ),
           ),
       ],

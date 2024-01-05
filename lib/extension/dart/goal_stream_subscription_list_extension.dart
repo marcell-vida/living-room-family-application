@@ -35,15 +35,19 @@ extension GoalStreamSubscriptionList
   /// Add some new subscriptions to the stream subscription list of individual users.
   void addSubscriptions(
       {List<FamilyMemberGoal>? goalsToAdd,
-        String? familyId,
-        String? userId,
+      String? familyId,
+      String? userId,
       required DatabaseService databaseService,
       void Function(FamilyMemberGoal?)? onGoalUpdates}) {
     if (goalsToAdd != null && goalsToAdd.isNotEmpty) {
       for (FamilyMemberGoal goal in goalsToAdd) {
-        if (goal.id.isNotEmptyOrNull && familyId.isNotEmptyOrNull && userId.isNotEmptyOrNull) {
-          StreamSubscription<FamilyMemberGoal?> goalStream =
-              databaseService.streamFamilyMemberGoal(familyId: familyId!, userId: userId!, goalId: goal.id!).listen(onGoalUpdates);
+        if (goal.id.isNotEmptyOrNull &&
+            familyId.isNotEmptyOrNull &&
+            userId.isNotEmptyOrNull) {
+          StreamSubscription<FamilyMemberGoal?> goalStream = databaseService
+              .streamFamilyMemberGoal(
+                  familyId: familyId!, userId: userId!, goalId: goal.id!)
+              .listen(onGoalUpdates);
 
           if (contains(goalStream)) {
             goalStream.cancel();
@@ -59,15 +63,19 @@ extension GoalStreamSubscriptionList
   /// individual users.
   void cancelSubscription(
       {List<FamilyMemberGoal>? goalsToRemove,
-        String? familyId,
-        String? userId,
+      String? familyId,
+      String? userId,
       required DatabaseService databaseService,
       void Function(FamilyMemberGoal?)? onGoalUpdates}) {
     if (goalsToRemove != null && goalsToRemove.isNotEmpty) {
       for (FamilyMemberGoal goal in goalsToRemove) {
-        if (goal.id.isNotEmptyOrNull && familyId.isNotEmptyOrNull && userId.isNotEmptyOrNull) {
-          StreamSubscription<FamilyMemberGoal?> goalStream =
-              databaseService.streamFamilyMemberGoal(familyId: familyId!, userId: goal.id!, goalId: goal.id!).listen(onGoalUpdates);
+        if (goal.id.isNotEmptyOrNull &&
+            familyId.isNotEmptyOrNull &&
+            userId.isNotEmptyOrNull) {
+          StreamSubscription<FamilyMemberGoal?> goalStream = databaseService
+              .streamFamilyMemberGoal(
+                  familyId: familyId!, userId: goal.id!, goalId: goal.id!)
+              .listen(onGoalUpdates);
 
           if (contains(goalStream)) {
             firstWhereOrNull((element) => element == goalStream)?.cancel();

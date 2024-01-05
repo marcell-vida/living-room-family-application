@@ -1,6 +1,6 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 
-abstract class MessagingBase{
+abstract class MessagingBase {
   Future<void> initNotifications({void Function(String?)? onClicked});
 
   Future<RemoteMessage?> getInitialMessage();
@@ -11,8 +11,12 @@ abstract class MessagingBase{
 
   Stream<String> get onTokenRefresh;
 
-  Future<void> subscribeToTopic(String topicId, Function() onDone, Function() onError);
+  void sendMessage(
+      {required String fcmToken, required String title, required String body});
 
-  Future<void> unsubscribeFromTopic(String topicId, Function() onDone, Function() onError);
+  Future<void> subscribeToTopic(
+      String topicId, Function() onDone, Function() onError);
 
+  Future<void> unsubscribeFromTopic(
+      String topicId, Function() onDone, Function() onError);
 }

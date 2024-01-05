@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:living_room/extension/firebase/firestore_extension.dart';
 import 'package:living_room/extension/result/database_exception_extension.dart';
-import 'package:living_room/main.dart';
 import 'package:living_room/model/database/base/firestore_item.dart';
 import 'package:living_room/model/database/families/family.dart';
 import 'package:living_room/model/database/families/family_member.dart';
@@ -23,10 +21,7 @@ FirestoreItemMapFunction _mapTask = (doc) => FamilyMemberTask.fromSnapshot(doc);
 FirestoreItemMapFunction _mapUser = (doc) => DatabaseUser.fromSnapshot(doc);
 
 FirestoreItemMapFunction? _firestoreItemMapFunction<T>() {
-  debugPrint('_firestoreItemMapFunction: T is $T');
-
   if (T == DatabaseUser) {
-    debugPrint('_firestoreItemMapFunction: T is DatabaseUser in if statement');
     return _mapUser;
   } else if (T == Invitation) {
     return _mapInv;
@@ -37,7 +32,6 @@ FirestoreItemMapFunction? _firestoreItemMapFunction<T>() {
   } else if (T == FamilyMemberTask) {
     return _mapTask;
   } else if (T == FamilyMemberGoal) {
-    log.i('_firestoreItemMapFunction: T is FamilyMemberGoal in if statement');
     return _mapGoal;
   }
   return null;
@@ -119,8 +113,6 @@ class DatabaseImp extends DatabaseBase {
       var documentMapEntry = data.document();
       if (documentMapEntry != null) {
         var x = _firestoreItemMapFunction<T>()?.call(documentMapEntry) as T;
-        log.d('streamTDocument: Update x == $x');
-
         return x;
       }
       return null;
@@ -129,12 +121,10 @@ class DatabaseImp extends DatabaseBase {
 
   @override
   Future<List<T>?> getTCollection<T>(String path) async {
-    var snapshot = await collection(userCollectionPath).get();
-    return snapshot
-        .data()
-        ?.entries
-        .map((entry) => _firestoreItemMapFunction<T>()?.call(entry) as T)
-        .toList();
+    var snapshot = await collection(path).get();
+    return snapshot.data()?.entries.map((entry) {
+      return _firestoreItemMapFunction<T>()?.call(entry) as T;
+    }).toList();
   }
 
   @override

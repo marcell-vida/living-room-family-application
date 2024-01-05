@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:living_room/extension/dart/context_extension.dart';
-import 'package:living_room/main.dart';
+import 'package:living_room/extension/dart/datetime_extension.dart';
 import 'package:living_room/model/database/families/family_member_task.dart';
+import 'package:living_room/state/object/member_bloc.dart';
 import 'package:living_room/state/screen/app_base/app_base_cubit.dart';
 import 'package:living_room/state/sheet/family/task_details_bloc.dart';
 import 'package:living_room/util/constants.dart';
 import 'package:living_room/widgets/default/default_avatar.dart';
 import 'package:living_room/widgets/default/default_button.dart';
-import 'package:living_room/widgets/default/default_check_box.dart';
 import 'package:living_room/widgets/default/default_text.dart';
 import 'package:living_room/widgets/default/default_toggle_switch.dart';
 import 'package:living_room/widgets/general/general_padding.dart';
 import 'package:living_room/widgets/spacers.dart';
-import 'package:living_room/extension/dart/datetime_extension.dart';
-import 'package:toggle_switch/toggle_switch.dart';
 
 class TaskDetailsViewingContent extends StatelessWidget {
   final String taskId;
   final AppBaseCubit appBaseCubit;
+  final MemberCubit? signedInMember;
   final TaskDetailsCubit taskDetailsCubit;
   final void Function()? onEdit;
 
@@ -27,6 +26,7 @@ class TaskDetailsViewingContent extends StatelessWidget {
       required this.taskId,
       required this.appBaseCubit,
       required this.taskDetailsCubit,
+      this.signedInMember,
       this.onEdit});
 
   @override
@@ -50,6 +50,9 @@ class TaskDetailsViewingContent extends StatelessWidget {
     FamilyMemberTask? task = taskDetailsCubit.state.existingTask;
     bool isFinished = task?.isFinished ?? false;
     bool isFinishApproved = task?.isFinishApproved ?? false;
+
+    /// user is child
+    if (signedInMember?.state.member?.isParent != true) return false;
 
     /// if the task is finished then enable
     bool result = isFinished == true;
@@ -85,6 +88,7 @@ class TaskDetailsViewingContent extends StatelessWidget {
     bool isFinished = task?.isFinished ?? false;
     bool isFinishApproved = task?.isFinishApproved ?? false;
     bool enableApproveButton = _enableApproveSwitch();
+    bool isUserParent = signedInMember?.state.member?.isParent == true;
 
     return <Widget>[
       /// photo
@@ -122,7 +126,7 @@ class TaskDetailsViewingContent extends StatelessWidget {
         offTitle: context.loc?.tasksTabDetailsInProgress,
         onTitle: context.loc?.tasksTabDetailsAccomplished,
         onChanged: (bool setTo) {
-          taskDetailsCubit.finish(setTo: setTo);
+          taskDetailsCubit.finish(setTo: setTo, context: context);
         },
       ),
       const VerticalSpacer.of20(),
@@ -140,7 +144,7 @@ class TaskDetailsViewingContent extends StatelessWidget {
 
       GeneralPadding(
         children: [
-          if (isFinished && !enableApproveButton) ...[
+          if (isFinished && !enableApproveButton && isUserParent) ...[
             const VerticalSpacer.of10(),
             DefaultText(
               context.loc?.tasksTabNotEnoughPointsToDisapprove ?? '',
@@ -188,13 +192,15 @@ class TaskDetailsViewingContent extends StatelessWidget {
       ),
 
       /// edit button
-      DefaultButton(
-          text: context.loc?.globalEdit,
-          callback: () {
-            /// show modify sheet
-            onEdit?.call();
-          }),
-      const VerticalSpacer.of40(),
+      if (isUserParent) ...[
+        DefaultButton(
+            text: context.loc?.globalEdit,
+            callback: () {
+              /// show modify sheet
+              onEdit?.call();
+            }),
+        const VerticalSpacer.of40(),
+      ],
 
       /// created at
       DefaultText(

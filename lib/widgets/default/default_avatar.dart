@@ -36,13 +36,6 @@ class DefaultAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return CircleAvatar(
-    //   backgroundImage: NetworkImage(url ?? ''),
-    //   radius: radius,
-    //   foregroundColor: foregroundColor,
-    //   backgroundColor: backgroundColor,
-    //   child: child,
-    // );
     return CircularProfileAvatar(
       url ?? '',
       placeHolder:
@@ -55,9 +48,7 @@ class DefaultAvatar extends StatelessWidget {
         initialsText ?? '',
         textAlign: TextAlign.center,
         style: const TextStyle(
-            color: AppColors.white,
-            fontSize: 14,
-            fontWeight: FontWeight.w600),
+            color: AppColors.white, fontSize: 14, fontWeight: FontWeight.w600),
       ),
       foregroundColor: foregroundColor,
       backgroundColor: backgroundColor,

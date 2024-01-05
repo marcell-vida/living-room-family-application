@@ -129,6 +129,7 @@ class StorageService {
                 ])),
                 '')
             .replaceAll('?alt=media', '');
+
         /// old file gets deleted
         _storageBase.deleteFile(
             '$firebaseStorageFamiliesPath/$familyUid/members/$userUid/tasks/$goalUid/$oldFileName');
@@ -137,16 +138,17 @@ class StorageService {
         return;
       }
     }
+
     /// upload new file
     _storageBase.uploadFile(
-      _normalUrl([
-        firebaseStorageFamiliesPath,
-        familyUid,
-        'members',
-        userUid,
-        'tasks',
-        goalUid
-      ]),
+        _normalUrl([
+          firebaseStorageFamiliesPath,
+          familyUid,
+          'members',
+          userUid,
+          'tasks',
+          goalUid
+        ]),
         localFilePath,
         uploadName,
         onSuccess: (path) => onSuccess?.call('$path?alt=media'),

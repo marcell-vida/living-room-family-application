@@ -9,12 +9,11 @@ const String familyDocumentNameField = "name";
 const String familyDocumentDescriptionField = "description";
 const String familyDocumentPhotoUrlField = "photoUrl";
 
-class Family extends FirestoreItem{
+class Family extends FirestoreItem {
   DateTime? createdAt;
   String? name;
   String? description;
   String? photoUrl;
-
 
   Family({this.createdAt, this.name, this.description, this.photoUrl});
 
@@ -33,9 +32,9 @@ class Family extends FirestoreItem{
 
   @override
   Map<String, dynamic> get toJson => {
-    familyDocumentCreationDateField: createdAt,
-    familyDocumentNameField: name,
-    familyDocumentDescriptionField: description,
-    familyDocumentPhotoUrlField: photoUrl
-  };
+        familyDocumentCreationDateField: createdAt,
+        familyDocumentNameField: name,
+        familyDocumentDescriptionField: description,
+        familyDocumentPhotoUrlField: photoUrl
+      };
 }

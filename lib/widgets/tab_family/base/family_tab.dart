@@ -39,13 +39,13 @@ class FamilyTab extends StatelessWidget {
   }
 
   Widget _tasksTabContent(BuildContext context) {
-    if (context.cubits.currentUserFamilies.families.isNotEmpty &&
+    if(context.cubits.currentUserFamilies.families.isEmpty){
+      return DefaultText('Nincsnenek családok');
+    }
+    else if (context.cubits.currentUserFamilies.families.isNotEmpty &&
         context.cubits.currentUserFamilies.families.first.state.family?.id !=
             null) {
       /// List of Families is not empty and the first element has a valid id
-
-      /// todo: loading on start up does not stop because family id updates
-      /// are not detected
 
       List<DropdownMenuItem<String>> items = [];
 
@@ -75,14 +75,10 @@ class FamilyTab extends StatelessWidget {
       /// selected DropdownMenuItem
       if (items.isNotEmpty) {
         currentValue = items.firstWhereOrNull((element) =>
-        element.value ==
+            element.value ==
             (context.states.familySelector.selectedFamily?.state.family?.id ??
                 ''));
       }
-
-      /// selected family's members
-      List<MemberCubit> members =
-          context.states.familySelector.selectedFamily?.memberCubits ?? [];
 
       return ScrollConfiguration(
           behavior: NoOverscrollIndicatorBehavior(),
@@ -97,6 +93,7 @@ class FamilyTab extends StatelessWidget {
                           .family?.photoUrl,
                       radius: 130,
                     ),
+
                     /// Family name and selector
                     Center(
                       child: DropdownButton(
@@ -113,6 +110,7 @@ class FamilyTab extends StatelessWidget {
                         },
                       ),
                     ),
+
                     /// Family description
                     Center(
                       child: DefaultText(
@@ -125,19 +123,39 @@ class FamilyTab extends StatelessWidget {
                   ],
                 ),
               ),
+
               /// Family members
-              for (MemberCubit cubit in members)
-                DefaultCard(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 5.0),
-                    child: MemberTile(
-                      memberCubit: cubit,
-                    ),
-                  ),
-                )
+              ..._membersList(context),
             ],
           ));
     }
     return const CircularProgressIndicator(color: AppColors.purple);
+  }
+
+  List<Widget> _membersList(BuildContext context) {
+    List<Widget> result = [];
+
+    String uid = context.cubits.base.getCurrentAuthUser?.uid ?? '';
+
+    MemberCubit? signedInMember =
+        (context.states.familySelector.selectedFamily?.memberCubits ?? [])
+            .firstWhereOrNull((element) => element.userId == uid);
+
+    for (MemberCubit cubit
+        in context.states.familySelector.selectedFamily?.memberCubits ?? []) {
+      MemberCubit currentCubit = cubit;
+      Widget currentWidget = DefaultCard(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 5.0),
+          child: MemberTile(
+            memberCubit: currentCubit,
+            signedInMember: signedInMember,
+          ),
+        ),
+      );
+
+      result.add(currentWidget);
+    }
+    return result;
   }
 }

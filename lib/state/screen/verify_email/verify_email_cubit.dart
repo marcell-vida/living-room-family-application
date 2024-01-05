@@ -27,7 +27,7 @@ class VerifyEmailCubit extends Cubit<VerifyEmailState> {
 
   Future<void> _resetStatus(int? delayInSeconds) async {
     if (delayInSeconds != null) {
-      for(int i = delayInSeconds; i > 0; i--){
+      for (int i = delayInSeconds; i > 0; i--) {
         emit(state.copyWith(countdownSeconds: i));
         await Future.delayed(const Duration(seconds: 1));
       }

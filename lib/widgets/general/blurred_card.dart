@@ -27,8 +27,7 @@ class BlurredCard extends StatelessWidget {
               decoration: BoxDecoration(
                   borderRadius: Constants.borderRadius,
                   border: Border.all(
-                      color: AppColors.whiteOp30,
-                      width: Constants.borderWidth),
+                      color: AppColors.whiteOp30, width: Constants.borderWidth),
                   gradient: LinearGradient(
                     begin: Alignment.topRight,
                     end: Alignment.bottomLeft,

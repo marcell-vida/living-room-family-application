@@ -11,7 +11,7 @@ enum InvalidInput {
 
 extension InvalidInputExtension on InvalidInput {
   String getErrorMessage(BuildContext context) {
-    try{
+    try {
       var appLocalizations = context.loc!;
       switch (this) {
         case InvalidInput.emptyInput:
@@ -25,7 +25,7 @@ extension InvalidInputExtension on InvalidInput {
         default:
           return appLocalizations.globalExceptionUnknownError;
       }
-    } catch (e){
+    } catch (e) {
       return '';
     }
   }

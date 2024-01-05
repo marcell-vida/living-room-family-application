@@ -38,8 +38,7 @@ class StorageImp extends StorageBase {
   }
 
   @override
-  void deleteFile(
-      String directory, {Function? onSuccess, Function? onError}) {
+  void deleteFile(String directory, {Function? onSuccess, Function? onError}) {
     _firebaseStorageRef
         .child(directory)
         .delete()

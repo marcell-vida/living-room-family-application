@@ -7,12 +7,13 @@ class GeneralPadding extends StatelessWidget {
   final double vertical;
   final MainAxisAlignment mainAxisAlignment;
 
-  const GeneralPadding({super.key,
-    this.child,
-    this.children,
-    this.horizontal = 10,
-    this.vertical = 0,
-    this.mainAxisAlignment = MainAxisAlignment.start});
+  const GeneralPadding(
+      {super.key,
+      this.child,
+      this.children,
+      this.horizontal = 10,
+      this.vertical = 0,
+      this.mainAxisAlignment = MainAxisAlignment.start});
 
   @override
   Widget build(BuildContext context) {

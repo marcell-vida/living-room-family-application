@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:living_room/extension/dart/context_extension.dart';
 import 'package:living_room/state/object/families_bloc.dart';
 import 'package:living_room/state/object/family_bloc.dart';
-import 'package:living_room/util/constants.dart';
 import 'package:living_room/widgets/default/default_card.dart';
 import 'package:living_room/widgets/general/no_overscroll_indicator_list_behavior.dart';
 import 'package:living_room/widgets/tab_families/families_tab_create_card.dart';
@@ -21,9 +20,6 @@ class FamiliesTab extends StatelessWidget {
         builder: (context, state) {
           return _familiesTabContent(
               context, context.cubits.currentUserFamilies.families);
-          // return context.cubits.currentUserFamilies.families.isNotEmpty
-          //     ?
-          //     : const CircularProgressIndicator(color: AppColors.purple);
         });
   }
 

@@ -10,12 +10,13 @@ class DefaultText extends StatelessWidget {
   final Color color;
   final TextOverflow? overflow;
 
-  const DefaultText( this.text,
+  const DefaultText(this.text,
       {Key? key,
       this.textAlign = TextAlign.left,
       this.fontWeight = FontWeight.w600,
       this.fontSize = 14.0,
-      this.color = AppColors.black, this.overflow})
+      this.color = AppColors.black,
+      this.overflow})
       : super(key: key);
 
   @override

@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,8 +17,8 @@ class ProfilePictureCubit extends Cubit<ProfilePictureState> {
 
   ProfilePictureCubit(
       {required DatabaseService databaseService,
-        required AuthenticationService authenticationService,
-        required StorageService storageService})
+      required AuthenticationService authenticationService,
+      required StorageService storageService})
       : _databaseService = databaseService,
         _authenticationService = authenticationService,
         _storageService = storageService,
@@ -39,29 +40,29 @@ class ProfilePictureCubit extends Cubit<ProfilePictureState> {
           authenticationService: _authenticationService,
           photoUrl: path,
           onSuccess: () {
-            emit(state.copyWith(
-                pictureUpdateStatus: ProcessStatus.successful));
-            debugPrint('SettingsCubit: state.uploadPicture: Successful operation');
+            emit(state.copyWith(pictureUpdateStatus: ProcessStatus.successful));
+            debugPrint(
+                'SettingsCubit: state.uploadPicture: Successful operation');
           },
-          onError: () => emit(state.copyWith(
-              pictureUpdateStatus: ProcessStatus.unsuccessful)));
+          onError: () => emit(
+              state.copyWith(pictureUpdateStatus: ProcessStatus.unsuccessful)));
     }
 
-    if(state.newPictureUrl == '' && authenticatedUser != null){
+    if (state.newPictureUrl == '' && authenticatedUser != null) {
       onSuccess(null);
     }
     if (state.newPictureUrl != null && authenticatedUser != null) {
       _storageService.changeUserProfilePicture(
           localFilePath: state.newPictureUrl!,
           uploadName:
-          '${Utils.userNameFromEmail(authenticatedUser.email ?? '')}${authenticatedUser.uid}${DateTime.now().millisecondsSinceEpoch}',
+              '${Utils.userNameFromEmail(authenticatedUser.email ?? '')}${authenticatedUser.uid}${DateTime.now().millisecondsSinceEpoch}',
           userUid:
-          '${Utils.userNameFromEmail(authenticatedUser.email ?? '')}${authenticatedUser.uid}',
+              '${Utils.userNameFromEmail(authenticatedUser.email ?? '')}${authenticatedUser.uid}',
           currentFilePath: databaseUser?.photoUrl,
           onSuccess: onSuccess,
           onError: () {
-            emit(
-                state.copyWith(pictureUpdateStatus: ProcessStatus.unsuccessful));
+            emit(state.copyWith(
+                pictureUpdateStatus: ProcessStatus.unsuccessful));
           });
     }
     emit(state.copyWith(pictureUpdateStatus: ProcessStatus.idle));
@@ -84,4 +85,3 @@ class ProfilePictureState extends Equatable {
   @override
   List<Object?> get props => [newPictureUrl, pictureUpdateStatus];
 }
-

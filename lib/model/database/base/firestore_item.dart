@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-abstract class FirestoreItem{
+abstract class FirestoreItem {
   String? rawId;
 
   String? get id => documentReference?.id ?? rawId;

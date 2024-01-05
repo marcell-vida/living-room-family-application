@@ -12,7 +12,8 @@ extension NavigatorStateExtension on NavigatorState {
   bool isCurrent(String route) {
     bool isCurrent = false;
     popUntil((current) {
-      debugPrint('NavigatorStateExtension.isCurrent: current inspected screen is: ${current.settings.name}');
+      debugPrint(
+          'NavigatorStateExtension.isCurrent: current inspected screen is: ${current.settings.name}');
       if (current.settings.name == route) {
         isCurrent = true;
       }

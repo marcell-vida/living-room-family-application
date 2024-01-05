@@ -17,7 +17,7 @@ class TaskDetailsLoadingContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<TaskDetailsCubit, TaskDetailsState>(
         buildWhen: (previous, current) =>
-        previous.saveStatus != current.saveStatus,
+            previous.saveStatus != current.saveStatus,
         builder: (cubitContext, state) {
           ProcessStatus processStatus = state.saveStatus;
           if (processStatus == ProcessStatus.unsuccessful) {
@@ -52,7 +52,6 @@ class TaskDetailsLoadingContent extends StatelessWidget {
           return const CircularProgressIndicator(
             color: AppColors.purple,
           );
-        }
-    );
+        });
   }
 }

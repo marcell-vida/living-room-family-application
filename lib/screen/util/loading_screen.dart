@@ -7,6 +7,10 @@ class LoadingScreen extends AppBaseScreen {
 
   @override
   Widget body(BuildContext context) {
-    return const Scaffold(body: Center(child: CircularProgressIndicator(color: AppColors.purple,)));
+    return const Scaffold(
+        body: Center(
+            child: CircularProgressIndicator(
+      color: AppColors.purple,
+    )));
   }
 }

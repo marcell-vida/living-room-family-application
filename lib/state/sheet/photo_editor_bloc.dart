@@ -3,7 +3,9 @@ import 'package:equatable/equatable.dart';
 import 'package:living_room/extension/dart/string_extension.dart';
 
 class PhotoEditorCubit extends Cubit<PhotoEditorState> {
-  PhotoEditorCubit() : super(const PhotoEditorState(photoDetailsMode: PhotoDetailsMode.choose));
+  PhotoEditorCubit()
+      : super(
+            const PhotoEditorState(photoDetailsMode: PhotoDetailsMode.choose));
 
   void setChosenPhoto(String? path) {
     if (path.isNotEmptyOrNull) {

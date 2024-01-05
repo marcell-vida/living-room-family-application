@@ -1,56 +1,54 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:living_room/extension/dart/context_extension.dart';
-import 'package:living_room/main.dart';
 import 'package:living_room/model/database/families/family_member.dart';
 import 'package:living_room/model/database/families/family_member_goal.dart';
 import 'package:living_room/model/database/families/family_member_task.dart';
 import 'package:living_room/state/object/member_bloc.dart';
 import 'package:living_room/util/constants.dart';
 import 'package:living_room/widgets/default/default_action_chip.dart';
-import 'package:living_room/widgets/general/titled_divider.dart';
-import 'package:living_room/widgets/tab_family/goals_tile.dart';
-import 'package:living_room/widgets/tab_family/tasks_tile.dart';
 import 'package:living_room/widgets/default/default_avatar.dart';
 import 'package:living_room/widgets/default/default_expansion_tile.dart';
+import 'package:living_room/widgets/general/titled_divider.dart';
 import 'package:living_room/widgets/spacers.dart';
+import 'package:living_room/widgets/tab_family/goals_tile.dart';
 import 'package:living_room/widgets/tab_family/member_details.dart';
+import 'package:living_room/widgets/tab_family/tasks_tile.dart';
 
 class MemberTile extends StatelessWidget {
   final MemberCubit memberCubit;
+  final MemberCubit? signedInMember;
 
-  const MemberTile({super.key, required this.memberCubit});
+  const MemberTile({super.key, required this.memberCubit, this.signedInMember});
 
   @override
   Widget build(BuildContext context) {
     /// state update management
-    return BlocProvider<MemberCubit>.value(
-      value: memberCubit,
-      child: BlocBuilder<MemberCubit, MemberState>(builder: (context, state) {
-        log.d('member state updated');
+    return BlocBuilder<MemberCubit, MemberState>(
+        bloc: memberCubit,
+        builder: (context, state) {
+          /// title of ExpansionTile
+          String? title = memberCubit.state.user?.displayName;
+          if (context.cubits.base.getCurrentAuthUser?.uid ==
+              memberCubit.userId) {
+            title = '$title (${context.loc?.globalMe ?? ''})';
+          }
 
-        /// title of ExpansionTile
-        String? title = memberCubit.state.user?.displayName;
-        if (context.cubits.base.getCurrentAuthUser?.uid == memberCubit.userId) {
-          title = '$title (${context.loc?.globalMe ?? ''})';
-        }
-
-        return DefaultExpansionTile(
-          title: title,
-          borderLess: true,
-          leading: memberCubit.state.user?.photoUrl != null
-              ? DefaultAvatar(
-                  url: memberCubit.state.user?.photoUrl,
-                  radius: 18,
-                  onTap: () {
-                    _onProfileTap(context);
-                  },
-                )
-              : null,
-          children: _tileContent(context),
-        );
-      }),
-    );
+          return DefaultExpansionTile(
+            title: title,
+            borderLess: true,
+            leading: memberCubit.state.user?.photoUrl != null
+                ? DefaultAvatar(
+                    url: memberCubit.state.user?.photoUrl,
+                    radius: 18,
+                    onTap: () {
+                      _onProfileTap(context);
+                    },
+                  )
+                : null,
+            children: _tileContent(context),
+          );
+        });
   }
 
   /// the content of this [MemberTile]
@@ -79,7 +77,7 @@ class MemberTile extends StatelessWidget {
 
     return <Widget>[
       /// tasks
-      TasksTile(memberCubit: memberCubit),
+      TasksTile(memberCubit: memberCubit, signedInMember: signedInMember),
 
       const VerticalSpacer.of10(),
 
@@ -143,7 +141,11 @@ class MemberTile extends StatelessWidget {
   void _onStatisticsTap() {}
 
   void _onProfileTap(BuildContext context) {
-    context
-        .showBottomSheet(children: [MemberDetails(memberCubit: memberCubit)]);
+    context.showBottomSheet(children: [
+      MemberDetails(
+        memberCubit: memberCubit,
+        signedInMember: signedInMember,
+      )
+    ]);
   }
 }

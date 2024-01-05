@@ -2,12 +2,12 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:living_room/extension/modify_family_process.dart';
 import 'package:living_room/extension/dart/context_extension.dart';
+import 'package:living_room/extension/modify_family_process.dart';
 import 'package:living_room/model/database/users/database_user.dart';
-import 'package:living_room/state/sheet/family/edit_family_bloc.dart';
 import 'package:living_room/state/object/family_bloc.dart';
 import 'package:living_room/state/object/member_bloc.dart';
+import 'package:living_room/state/sheet/family/edit_family_bloc.dart';
 import 'package:living_room/util/constants.dart';
 import 'package:living_room/util/general_image_picker.dart';
 import 'package:living_room/util/utils.dart';
@@ -16,8 +16,8 @@ import 'package:living_room/widgets/default/default_button.dart';
 import 'package:living_room/widgets/default/default_input_field.dart';
 import 'package:living_room/widgets/default/default_slider.dart';
 import 'package:living_room/widgets/default/default_text.dart';
-import 'package:living_room/widgets/general/titled_divider.dart';
 import 'package:living_room/widgets/general/list_item_with_picture_icon.dart';
+import 'package:living_room/widgets/general/titled_divider.dart';
 import 'package:living_room/widgets/spacers.dart';
 
 class GeneralFamilyEditor {

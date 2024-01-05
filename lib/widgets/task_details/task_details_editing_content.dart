@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:living_room/extension/dart/context_extension.dart';
 import 'package:living_room/extension/dart/datetime_extension.dart';
-import 'package:living_room/main.dart';
 import 'package:living_room/state/sheet/family/task_details_bloc.dart';
 import 'package:living_room/util/constants.dart';
 import 'package:living_room/util/general_image_picker.dart';
@@ -24,10 +23,15 @@ class TaskDetailsEditingContent extends StatelessWidget {
   final TaskDetailsCubit taskDetailsCubit;
   final String? title;
   final String? slider;
+  final BuildContext? defaultContext;
   final TextEditingController textEditingController = TextEditingController();
 
   TaskDetailsEditingContent(
-      {super.key, required this.taskDetailsCubit, this.title, this.slider});
+      {super.key,
+      required this.taskDetailsCubit,
+      this.defaultContext,
+      this.title,
+      this.slider});
 
   @override
   Widget build(BuildContext context) {
@@ -95,10 +99,11 @@ class TaskDetailsEditingContent extends StatelessWidget {
               text: context.loc?.familiesTabCreatePhotoEdit,
               callback: () => GeneralImagePicker(
                   context: context,
-                  currentUrl: taskDetailsCubit.state.taskPhotoUploadPath == null &&
-                          existingPhotoUrl.isNotEmpty
-                      ? existingPhotoUrl
-                      : null,
+                  currentUrl:
+                      taskDetailsCubit.state.taskPhotoUploadPath == null &&
+                              existingPhotoUrl.isNotEmpty
+                          ? existingPhotoUrl
+                          : null,
                   pickSheetTitle:
                       context.loc?.tasksTabEditTaskPhotoModification,
                   approveSheetTitle:
@@ -225,10 +230,6 @@ class TaskDetailsEditingContent extends StatelessWidget {
       // task exists but the data is not loaded yet
       return [const CircularProgressIndicator(color: AppColors.purple)];
     } else {
-      log.d('editTaskCubit.state.points == ${taskDetailsCubit.state.points}, '
-          'editTaskCubit.existingTask?.state.task?.points == '
-          '${taskDetailsCubit.state.existingTask?.points}');
-
       int? numberOfPoints = taskDetailsCubit.state.points ??
           taskDetailsCubit.state.existingTask?.points;
 
@@ -301,20 +302,22 @@ class TaskDetailsEditingContent extends StatelessWidget {
                 taskDetailsCubit.state.existingTask?.title ??
                 '';
             if (name.isNotEmpty) {
-              taskDetailsCubit.save();
+              taskDetailsCubit.save(context: defaultContext);
             } else {
               context.showInfoSheet(
                   context.loc?.familiesTabCreateNameShouldNotBeEmpty ?? '');
             }
           },
         ),
-        const VerticalSpacer.of40(),
-        DefaultButton(
-            text: context.loc?.globalDiscardModifications,
-            textColor: AppColors.red,
-            color: AppColors.white,
-            borderColor: AppColors.red,
-            callback: () => taskDetailsCubit.setMode(TaskDetailsMode.viewing))
+        if (taskDetailsCubit.state.existingTask != null) ...[
+          const VerticalSpacer.of40(),
+          DefaultButton(
+              text: context.loc?.globalDiscardModifications,
+              textColor: AppColors.red,
+              color: AppColors.white,
+              borderColor: AppColors.red,
+              callback: () => taskDetailsCubit.setMode(TaskDetailsMode.viewing))
+        ]
       ])
     ];
   }

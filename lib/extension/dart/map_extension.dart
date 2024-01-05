@@ -60,7 +60,7 @@ extension MapExtension on Map<String, dynamic> {
     }
   }
 
-  List<String>? getStringList(String key, {List<String>? defaultValue}){
+  List<String>? getStringList(String key, {List<String>? defaultValue}) {
     if (containsKey(key)) {
       try {
         return this[key] as List<String>;
@@ -72,7 +72,8 @@ extension MapExtension on Map<String, dynamic> {
     }
   }
 
-  Map<String, dynamic>? getMap(String key, {Map<String, dynamic>? defaultValue}) {
+  Map<String, dynamic>? getMap(String key,
+      {Map<String, dynamic>? defaultValue}) {
     if (containsKey(key)) {
       try {
         return this[key] as Map<String, dynamic>;

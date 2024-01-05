@@ -18,74 +18,68 @@ abstract class AppBaseScreen extends StatelessWidget {
   @nonVirtual
   @override
   Widget build(BuildContext context) {
-    return MultiBlocListener(
-        listeners: [
-          // receiving push notification from Firebase
-          BlocListener<AppBaseCubit, AppBaseState>(
-              listenWhen: (previous, current) =>
+    return MultiBlocListener(listeners: [
+      // receiving push notification from Firebase
+      BlocListener<AppBaseCubit, AppBaseState>(
+          listenWhen: (previous, current) =>
               previous.foregroundMessage != current.foregroundMessage,
-              listener: (context, state) {
-                context.hidePreviousShowNewSnackBar(
-                    state.foregroundMessage?.notification?.body ?? '',
-                    duration: const Duration(seconds: 10));
-              }),
-          // user signs in, -out, -up or other changes occur
-          BlocListener<AppBaseCubit, AppBaseState>(
-            listenWhen: (previous, current) =>
-                previous.currentUserStatus != current.currentUserStatus,
-            listener: (context, state) async {
-              debugPrint(
-                  'BaseScreen: state.authenticationState == ${state.currentUserStatus}');
-              debugPrint(
-                  'BaseScreen: state.internetConnectivityState == ${state.networkConnectionStatus}');
+          listener: (context, state) {
+            context.hidePreviousShowNewSnackBar(
+                state.foregroundMessage?.notification?.body ?? '',
+                duration: const Duration(seconds: 10));
+          }),
+      // user signs in, -out, -up or other changes occur
+      BlocListener<AppBaseCubit, AppBaseState>(
+        listenWhen: (previous, current) =>
+            previous.currentUserStatus != current.currentUserStatus,
+        listener: (context, state) async {
+          debugPrint(
+              'BaseScreen: state.authenticationState == ${state.currentUserStatus}');
+          debugPrint(
+              'BaseScreen: state.internetConnectivityState == ${state.networkConnectionStatus}');
 
-              if (state.currentUserStatus == null) {
-                Navigator.of(context).pushReplacementNamed(AppRoutes.loading);
-              } else if (state.currentUserStatus ==
-                  CurrentUserStatus.signedInEmailNotVerified) {
-                Navigator.of(context).pushReplacementNamed(AppRoutes.verify);
-              } else if (state.currentUserStatus ==
-                  CurrentUserStatus.signedIn) {
-                // navigate to home
-                if (context.mounted) {
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, AppRoutes.home, (route) => false);
-                }
-              } else if (state.currentUserStatus ==
-                  CurrentUserStatus.signedOut) {
-                Navigator.pushNamedAndRemoveUntil(
-                    context, AppRoutes.signIn, (route) => false);
-              } else if (state.currentUserStatus ==
-                  CurrentUserStatus.userBanned) {
-                Navigator.pushNamedAndRemoveUntil(
-                    context, AppRoutes.banned, (route) => false);
-              } else {
-                Navigator.of(context).pushNamed(AppRoutes.wrong);
-              }
-            },
-          ),
-          // network connection status changes
-          BlocListener<AppBaseCubit, AppBaseState>(
-            listenWhen: (previous, current) =>
-                previous.networkConnectionStatus !=
-                current.networkConnectionStatus,
-            listener: (context, state) {
-              debugPrint(
-                  'BaseScreen: state.authenticationState == ${state.currentUserStatus}');
-              debugPrint(
-                  'BaseScreen: state.internetConnectivityState == ${state.networkConnectionStatus}');
+          if (state.currentUserStatus == null) {
+            Navigator.of(context).pushReplacementNamed(AppRoutes.loading);
+          } else if (state.currentUserStatus ==
+              CurrentUserStatus.signedInEmailNotVerified) {
+            Navigator.of(context).pushReplacementNamed(AppRoutes.verify);
+          } else if (state.currentUserStatus == CurrentUserStatus.signedIn) {
+            // navigate to home
+            if (context.mounted) {
+              Navigator.pushNamedAndRemoveUntil(
+                  context, AppRoutes.home, (route) => false);
+            }
+          } else if (state.currentUserStatus == CurrentUserStatus.signedOut) {
+            Navigator.pushNamedAndRemoveUntil(
+                context, AppRoutes.signIn, (route) => false);
+          } else if (state.currentUserStatus == CurrentUserStatus.userBanned) {
+            Navigator.pushNamedAndRemoveUntil(
+                context, AppRoutes.banned, (route) => false);
+          } else {
+            Navigator.of(context).pushNamed(AppRoutes.wrong);
+          }
+        },
+      ),
+      // network connection status changes
+      BlocListener<AppBaseCubit, AppBaseState>(
+        listenWhen: (previous, current) =>
+            previous.networkConnectionStatus != current.networkConnectionStatus,
+        listener: (context, state) {
+          debugPrint(
+              'BaseScreen: state.authenticationState == ${state.currentUserStatus}');
+          debugPrint(
+              'BaseScreen: state.internetConnectivityState == ${state.networkConnectionStatus}');
 
-              if (state.networkConnectionStatus ==
-                  NetworkConnectionStatus.connectedNoInternet) {
-                Navigator.of(context).pushNamedIfNotCurrent(AppRoutes.noConnection);
-              } else if (state.networkConnectionStatus ==
-                  NetworkConnectionStatus.notConnected) {
-                Navigator.of(context).pushNamedIfNotCurrent(AppRoutes.noConnection);
-              }
-            },
-          ),
-        ],
-        child: body(context));
+          if (state.networkConnectionStatus ==
+              NetworkConnectionStatus.connectedNoInternet) {
+            Navigator.of(context).pushNamedIfNotCurrent(AppRoutes.noConnection);
+          } else if (state.networkConnectionStatus ==
+              NetworkConnectionStatus.notConnected) {
+            Navigator.of(context).pushNamedIfNotCurrent(AppRoutes.noConnection);
+          }
+        },
+      ),
+    ], child: body(context));
   }
 
   Widget body(BuildContext context);

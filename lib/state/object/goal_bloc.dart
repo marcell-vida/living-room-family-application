@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:living_room/main.dart';
 import 'package:living_room/model/database/families/family_member_goal.dart';
 import 'package:living_room/service/database/database_service.dart';
 
@@ -50,7 +49,6 @@ class FamilyGoalState extends Equatable {
   const FamilyGoalState({this.goal, this.updateFlag = true});
 
   FamilyGoalState copyWith({FamilyMemberGoal? goal}) {
-    log.d('copppppy, goal.title == ${goal?.title}, goal.photoUrl == ${goal?.photoUrl}');
     return FamilyGoalState(goal: goal ?? this.goal, updateFlag: !updateFlag);
   }
 

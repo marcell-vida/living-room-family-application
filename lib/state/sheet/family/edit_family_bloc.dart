@@ -2,10 +2,9 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:living_room/extension/modify_family_process.dart';
-import 'package:living_room/extension/dart/data_base_user_stream_subscription_list_extension.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:living_room/model/complex_user.dart';
+import 'package:living_room/extension/dart/data_base_user_stream_subscription_list_extension.dart';
+import 'package:living_room/extension/modify_family_process.dart';
 import 'package:living_room/model/database/families/family.dart';
 import 'package:living_room/model/database/families/family_member.dart';
 import 'package:living_room/model/database/users/database_user.dart';
@@ -451,7 +450,6 @@ class EditFamilyCubit extends Cubit<EditFamilyState> {
 
 class EditFamilyState extends Equatable {
   final FamilyState? existingFamilyState;
-  final List<ComplexUser>? existingMembers;
   final String? name;
   final String? description;
   final String? photoUploadPath;
@@ -468,7 +466,6 @@ class EditFamilyState extends Equatable {
 
   const EditFamilyState(
       {this.existingFamilyState,
-      this.existingMembers,
       this.name,
       this.description,
       this.tempPhotoPath,
@@ -485,7 +482,6 @@ class EditFamilyState extends Equatable {
 
   EditFamilyState copyWith(
       {FamilyState? existingFamilyState,
-      List<ComplexUser>? existingMembers,
       String? name,
       String? description,
       String? tempPhotoPath,
@@ -501,7 +497,6 @@ class EditFamilyState extends Equatable {
     debugPrint('EditFamilyState.copyWith: name == $name');
     return EditFamilyState(
         existingFamilyState: existingFamilyState ?? this.existingFamilyState,
-        existingMembers: existingMembers ?? this.existingMembers,
         name: name ?? this.name,
         description: description ?? this.description,
         tempPhotoPath: tempPhotoPath ?? this.tempPhotoPath,

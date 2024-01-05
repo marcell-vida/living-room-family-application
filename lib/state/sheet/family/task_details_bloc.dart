@@ -1,12 +1,16 @@
 import 'dart:async';
 
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:living_room/extension/dart/context_extension.dart';
 import 'package:living_room/extension/dart/string_extension.dart';
 import 'package:living_room/model/database/families/family_member.dart';
 import 'package:living_room/model/database/families/family_member_task.dart';
+import 'package:living_room/model/database/users/database_user.dart';
 import 'package:living_room/service/authentication/authentication_service.dart';
 import 'package:living_room/service/database/database_service.dart';
+import 'package:living_room/service/messaging/messaging_service.dart';
 import 'package:living_room/service/storage/storage_service.dart';
 import 'package:living_room/util/utils.dart';
 
@@ -18,6 +22,7 @@ class TaskDetailsCubit extends Cubit<TaskDetailsState> {
   final AuthenticationService _authenticationService;
   final DatabaseService _databaseService;
   final StorageService _storageService;
+  final MessagingService _messagingService;
   StreamSubscription? _existingTaskStreamSubscription;
   StreamSubscription? _memberStreamSubscription;
 
@@ -25,12 +30,14 @@ class TaskDetailsCubit extends Cubit<TaskDetailsState> {
       {required AuthenticationService authenticationService,
       required DatabaseService databaseService,
       required StorageService storageService,
+      required MessagingService messagingService,
       required this.familyId,
       required this.userId,
       this.existingTaskId})
       : _authenticationService = authenticationService,
         _databaseService = databaseService,
         _storageService = storageService,
+        _messagingService = messagingService,
         super(const TaskDetailsState()) {
     _init();
   }
@@ -67,7 +74,7 @@ class TaskDetailsCubit extends Cubit<TaskDetailsState> {
     }
   }
 
-  Future<void> finish({bool? setTo}) async {
+  Future<void> finish({bool? setTo, BuildContext? context}) async {
     if (existingTaskId == null ||
         state.saveStatus == ProcessStatus.processing) {
       /// not valid task or already processing previous task
@@ -84,11 +91,36 @@ class TaskDetailsCubit extends Cubit<TaskDetailsState> {
         taskUid: existingTaskId!,
         finished: newFinishedValue,
         onError: () {
-          /// update task succeeded
+          /// update task failed
           emit(state.copyWith(saveStatus: ProcessStatus.unsuccessful));
         },
-        onSuccess: () {
-          /// update task failed
+        onSuccess: () async {
+          /// update task succeeded
+
+          /// send message to the creator
+          if (context != null && newFinishedValue) {
+            String creatorId = (await _databaseService.getFamilyMemberTask(
+                        familyId: familyId,
+                        userId: userId,
+                        taskId: existingTaskId!))
+                    ?.userCreated ??
+                '';
+
+            if (creatorId.isNotEmpty) {
+              DatabaseUser? creator =
+                  await _databaseService.getUserById(uid: creatorId);
+
+              if (creator != null && creator.generalNotification == true) {
+                String? fcmToken = creator.fcmToken;
+
+                if (fcmToken != null && context.mounted) {
+                  _messagingService.sendApproveNeededMessage(
+                      fcmToken, context.loc!);
+                }
+              }
+            }
+          }
+
           emit(state.copyWith(saveStatus: ProcessStatus.successful));
         });
   }
@@ -143,7 +175,7 @@ class TaskDetailsCubit extends Cubit<TaskDetailsState> {
         });
   }
 
-  Future<void> save() async {
+  Future<void> save({BuildContext? context}) async {
     emit(state.copyWith(
         saveStatus: ProcessStatus.processing,
         taskDetailsMode: TaskDetailsMode.loading));
@@ -201,6 +233,7 @@ class TaskDetailsCubit extends Cubit<TaskDetailsState> {
             await _databaseService.createFamilyMemberTask(
                 familyUid: familyId,
                 userUid: userId,
+                authenticationService: _authenticationService,
                 title: state.title ?? state.existingTask?.title,
                 description:
                     state.description ?? state.existingTask?.description,
@@ -210,6 +243,13 @@ class TaskDetailsCubit extends Cubit<TaskDetailsState> {
         if (result?.id == null) {
           emit(state.copyWith(saveStatus: ProcessStatus.unsuccessful));
         } else {
+          String? fcmToken =
+              (await _databaseService.getUserById(uid: userId))?.fcmToken;
+
+          if (fcmToken != null && context != null && context.mounted) {
+            _messagingService.sendNewTaskMessage(fcmToken, context.loc!);
+          }
+
           if (state.taskPhotoUploadPath.isNotEmptyOrNull) {
             saveTaskPhotoToDb(taskId: result!.id);
           } else {

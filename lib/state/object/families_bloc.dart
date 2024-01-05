@@ -4,6 +4,7 @@ import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:living_room/extension/dart/string_extension.dart';
+import 'package:living_room/main.dart';
 import 'package:living_room/model/database/users/invitation.dart';
 import 'package:living_room/service/authentication/authentication_service.dart';
 import 'package:living_room/service/database/database_service.dart';
@@ -22,6 +23,7 @@ class FamiliesCubit extends Cubit<FamiliesState> {
         _authenticationService = authenticationService,
         families = <FamilyCubit>[],
         super(const FamiliesState()) {
+    log.d('FamiliesCubit created');
     _init();
   }
 
@@ -67,11 +69,11 @@ class FamiliesCubit extends Cubit<FamiliesState> {
       for (Invitation invitation in invitations) {
         bool isUpdate = false;
         for (FamilyCubit familyCubit in families) {
-          if (familyCubit.state.invitation != null &&
-              familyCubit.state.invitation!.idNotNullOrEmpty) {
+          if (familyCubit.familyId == invitation.familyId) {
             // Family already created for this invitation, this is an update
             isUpdate = true;
             familyCubit.setInvitation(invitation);
+            break;
           }
         }
         if (!isUpdate && invitation.familyId != null) {
@@ -89,7 +91,22 @@ class FamiliesCubit extends Cubit<FamiliesState> {
 
       if (addList.isNotEmpty) families.addAll(addList);
     }
+
+    if (families.isNotEmpty && families.first.state.family?.id == null) {
+      _fetchFirstFamily();
+    }
+
     emit(state.copyWith());
+  }
+
+  Future<void> _fetchFirstFamily() async {
+    while (true) {
+      if (families.first.state.family?.id != null) {
+        emit(state.copyWith());
+        return;
+      }
+      await Future.delayed(const Duration(milliseconds: 400));
+    }
   }
 
   @override

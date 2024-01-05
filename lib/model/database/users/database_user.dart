@@ -37,8 +37,7 @@ class DatabaseUser extends FirestoreItem {
     var data = snapshotEntry.value;
     email = data.getString(userDocumentEmailField);
     displayName = data.getString(userDocumentDisplayNameField);
-    photoUrl =
-        data.getString(userDocumentPhotoUrlField);
+    photoUrl = data.getString(userDocumentPhotoUrlField);
     isBanned = data.getBool(userDocumentIsBannedField);
     isArchived = data.getBool(userDocumentIsArchiveField);
     createdAt = data.getTimestamp(userDocumentCreationDateField)?.toDate();
@@ -51,13 +50,13 @@ class DatabaseUser extends FirestoreItem {
 
   @override
   Map<String, dynamic> get toJson => {
-    userDocumentEmailField: email,
-    userDocumentDisplayNameField: displayName,
-    userDocumentPhotoUrlField: photoUrl,
-    userDocumentIsBannedField: isBanned,
-    userDocumentIsArchiveField: isArchived,
-    userDocumentCreationDateField: createdAt,
-    userDocumentFcmTokenField: fcmToken,
-    userDocumentGeneralNotificationsField: generalNotification,
-  };
+        userDocumentEmailField: email,
+        userDocumentDisplayNameField: displayName,
+        userDocumentPhotoUrlField: photoUrl,
+        userDocumentIsBannedField: isBanned,
+        userDocumentIsArchiveField: isArchived,
+        userDocumentCreationDateField: createdAt,
+        userDocumentFcmTokenField: fcmToken,
+        userDocumentGeneralNotificationsField: generalNotification,
+      };
 }

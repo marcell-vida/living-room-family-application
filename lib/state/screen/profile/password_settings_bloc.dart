@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:living_room/extension/result/invalid_input_extension.dart';
 import 'package:living_room/model/database/users/database_user.dart';
 import 'package:living_room/service/authentication/authentication_service.dart';
-import 'package:living_room/service/database/database_service.dart';
 import 'package:living_room/util/utils.dart';
 
 class PasswordSettingsCubit extends Cubit<PasswordSettingsState> {

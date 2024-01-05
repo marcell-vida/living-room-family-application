@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter/material.dart';
 import 'package:living_room/extension/result/invalid_input_extension.dart';
 import 'package:living_room/model/authentication/auth_user.dart';
 import 'package:living_room/service/authentication/authentication_service.dart';
@@ -31,7 +30,7 @@ class SignInCubit extends Cubit<SignInState> {
     emit(state.copyWith(password: newValue, signInStatus: ProcessStatus.idle));
   }
 
-  void validate(){
+  void validate() {
     bool isEmailValid = Utils.isEmailFormatValid(state.email);
     InvalidInput? invalidEmailInput;
 

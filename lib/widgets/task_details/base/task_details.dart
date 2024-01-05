@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:living_room/extension/dart/context_extension.dart';
+import 'package:living_room/state/object/member_bloc.dart';
 import 'package:living_room/state/screen/app_base/app_base_cubit.dart';
 import 'package:living_room/state/sheet/family/task_details_bloc.dart';
 import 'package:living_room/util/constants.dart';
@@ -11,6 +12,7 @@ import 'package:living_room/widgets/task_details/task_details_viewing_content.da
 class TaskDetails {
   final BuildContext defaultContext;
   final AppBaseCubit appBaseCubit;
+  final MemberCubit? signedInMember;
   final String? existingTaskId;
   final String familyId;
   final String userId;
@@ -22,6 +24,7 @@ class TaskDetails {
       required this.familyId,
       required this.userId,
       required this.appBaseCubit,
+      this.signedInMember,
       this.existingTaskId}) {
     _show();
   }
@@ -36,6 +39,7 @@ class TaskDetails {
           authenticationService: defaultContext.services.authentication,
           databaseService: defaultContext.services.database,
           storageService: defaultContext.services.storage,
+          messagingService: defaultContext.services.messaging,
           existingTaskId: existingTaskId,
           familyId: familyId,
           userId: userId),
@@ -50,6 +54,7 @@ class TaskDetails {
                   /// currently editing
                   return TaskDetailsEditingContent(
                     taskDetailsCubit: cubitContext.cubits.editTask,
+                    defaultContext: defaultContext,
                     title: cubitContext.cubits.editTask.existingTaskId != null
                         ? cubitContext.loc?.tasksTabEditModifyTask
                         : cubitContext.loc?.tasksTabEditAddTask,
@@ -68,6 +73,7 @@ class TaskDetails {
                   return existingTaskId != null
                       ? TaskDetailsViewingContent(
                           appBaseCubit: appBaseCubit,
+                          signedInMember: signedInMember,
                           taskDetailsCubit: cubitContext.cubits.editTask,
                           taskId: existingTaskId!,
                           onEdit: () => cubitContext.cubits.editTask

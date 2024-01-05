@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:living_room/extension/dart/context_extension.dart';
 import 'package:living_room/state/screen/profile/notification_settings_bloc.dart';
-import 'package:living_room/state/screen/profile/password_settings_bloc.dart';
 import 'package:living_room/state/sheet/profile/profile_name_bloc.dart';
 import 'package:living_room/state/sheet/profile/profile_picture_bloc.dart';
 import 'package:living_room/util/constants.dart';
@@ -10,10 +9,7 @@ import 'package:living_room/util/utils.dart';
 import 'package:living_room/widgets/default/default_button.dart';
 import 'package:living_room/widgets/default/default_card.dart';
 import 'package:living_room/widgets/default/default_container.dart';
-import 'package:living_room/widgets/default/default_input_field.dart';
-import 'package:living_room/widgets/default/default_slider.dart';
 import 'package:living_room/widgets/default/default_text.dart';
-import 'package:living_room/widgets/default/default_toggle_switch.dart';
 import 'package:living_room/widgets/general/loading_switch.dart';
 import 'package:living_room/widgets/general/no_overscroll_indicator_list_behavior.dart';
 import 'package:living_room/widgets/spacers.dart';
@@ -102,7 +98,8 @@ class ProfileTab extends StatelessWidget {
                                           NotificationSettingsState>(
                                       builder: (context, state) {
                                     return LoadingSwitch(
-                                      switchState: state.user?.generalNotification,
+                                      switchState:
+                                          state.user?.generalNotification,
                                       processStatus: state.saveStatus,
                                       onChanged: (_) => context
                                           .cubits.notificationSettings
@@ -144,11 +141,13 @@ class ProfileTab extends StatelessWidget {
                           color: AppColors.red,
                           text: context.loc?.globalSignOut,
                           elevation: 3,
-                          callback: () => context.cubits.base.signOut()),
+                          callback: () {
+                            context.cubits.navigatorBar.changeIndex(0);
+                            context.cubits.base.signOut();
+                          }),
                     ],
                   ),
                 )
-                // OtherSettingsTile()
               ],
             ),
           ),

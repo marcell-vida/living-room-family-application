@@ -4,7 +4,6 @@ import 'package:collection/collection.dart';
 import 'package:living_room/model/database/users/database_user.dart';
 import 'package:living_room/service/database/database_service.dart';
 
-
 extension DatabaseUserStreamSubscriptionList
     on List<StreamSubscription<DatabaseUser?>> {
   /// Cancel all subscriptions from the stream subscription list of individual users

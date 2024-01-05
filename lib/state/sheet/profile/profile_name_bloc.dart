@@ -12,7 +12,7 @@ class ProfileNameCubit extends Cubit<ProfileNameState> {
 
   ProfileNameCubit(
       {required DatabaseService databaseService,
-        required AuthenticationService authenticationService})
+      required AuthenticationService authenticationService})
       : _databaseService = databaseService,
         _authenticationService = authenticationService,
         super(const ProfileNameState());

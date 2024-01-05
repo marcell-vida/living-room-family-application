@@ -15,9 +15,7 @@ abstract class DatabaseBase {
 
   Future<T?>? getTDocument<T>(String path);
 
-  Stream<List<T>?> streamTCollection<T>(
-      String path);
+  Stream<List<T>?> streamTCollection<T>(String path);
 
-  Future<List<T>?> getTCollection<T>(
-      String path);
+  Future<List<T>?> getTCollection<T>(String path);
 }

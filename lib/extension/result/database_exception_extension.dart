@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:living_room/extension/dart/context_extension.dart';
 
-enum DatabaseException {
-  permissionDenied,
-  noDocumentFound,
-  unknown
-}
+enum DatabaseException { permissionDenied, noDocumentFound, unknown }
 
 extension DatabaseExceptionExtension on DatabaseException {
   String getErrorMessage(BuildContext context) {
-    try{
+    try {
       var appLocalizations = context.loc!;
       switch (this) {
         case DatabaseException.permissionDenied:
@@ -21,7 +17,7 @@ extension DatabaseExceptionExtension on DatabaseException {
         default:
           return appLocalizations.globalExceptionUnknownError;
       }
-    } catch (e){
+    } catch (e) {
       return '';
     }
   }

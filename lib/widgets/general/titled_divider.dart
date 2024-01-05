@@ -24,11 +24,10 @@ class TitledDivider extends StatelessWidget {
                     color: AppColors.white,
                     borderRadius: Constants.borderRadius,
                     border: Border.all(
-                        color: AppColors.purple,
-                        width: Constants.borderWidth)),
+                        color: AppColors.purple, width: Constants.borderWidth)),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 10, vertical: 2),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
                   child: DefaultText(
                     title ?? '',
                     color: AppColors.purple,

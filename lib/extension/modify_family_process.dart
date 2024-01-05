@@ -1,5 +1,5 @@
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:living_room/extension/dart/context_extension.dart';
 
 enum ModifyFamilyProcess {
@@ -10,8 +10,9 @@ enum ModifyFamilyProcess {
   saveOwnerInvitation,
   saveInvitations
 }
-extension ModifyFamilyProcessExtension on ModifyFamilyProcess{
-  String getTitle (BuildContext context){
+
+extension ModifyFamilyProcessExtension on ModifyFamilyProcess {
+  String getTitle(BuildContext context) {
     try {
       AppLocalizations appLocalizations = context.loc!;
 

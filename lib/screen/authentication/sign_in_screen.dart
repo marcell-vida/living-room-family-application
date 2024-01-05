@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:living_room/extension/dart/context_extension.dart';
+import 'package:living_room/extension/result/auth_exception_extension.dart';
+import 'package:living_room/extension/result/invalid_input_extension.dart';
+import 'package:living_room/extension/result/success_message_extension.dart';
 import 'package:living_room/screen/base/content_in_card_base_screen.dart';
 import 'package:living_room/state/screen/sign_in/sign_in_cubit.dart';
 import 'package:living_room/state/screen/sign_in/sign_in_state.dart';
@@ -11,9 +14,6 @@ import 'package:living_room/widgets/default/default_input_field.dart';
 import 'package:living_room/widgets/default/default_text.dart';
 import 'package:living_room/widgets/default/default_text_button.dart';
 import 'package:living_room/widgets/spacers.dart';
-import 'package:living_room/extension/result/success_message_extension.dart';
-import 'package:living_room/extension/result/auth_exception_extension.dart';
-import 'package:living_room/extension/result/invalid_input_extension.dart';
 
 class SignInScreen extends ContentInCardBaseScreen {
   final _formKey = GlobalKey<FormState>();
@@ -49,7 +49,10 @@ class SignInScreen extends ContentInCardBaseScreen {
               key: _formKey,
               child: Column(
                 children: [
-                  Image.asset(AppImages.appIcon, height: 150,),
+                  Image.asset(
+                    AppImages.appIcon,
+                    height: 150,
+                  ),
                   const VerticalSpacer.of13(),
                   DefaultText(
                     context.loc?.appName ?? '',

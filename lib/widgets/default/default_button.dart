@@ -16,19 +16,20 @@ class DefaultButton extends StatelessWidget {
   final IconData? suffixIcon;
   final BorderRadius? borderRadius;
 
-  const DefaultButton({Key? key,
-    this.text = '',
-    required this.callback,
-    this.color = AppColors.purple,
-    this.borderColor,
-    this.textColor = AppColors.white,
-    this.isLoading,
-    this.isEnabled,
-    this.showErrorColor,
-    this.leadIcon,
-    this.suffixIcon,
-    this.borderRadius,
-    this.elevation})
+  const DefaultButton(
+      {Key? key,
+      this.text = '',
+      required this.callback,
+      this.color = AppColors.purple,
+      this.borderColor,
+      this.textColor = AppColors.white,
+      this.isLoading,
+      this.isEnabled,
+      this.showErrorColor,
+      this.leadIcon,
+      this.suffixIcon,
+      this.borderRadius,
+      this.elevation})
       : super(key: key);
 
   @override
@@ -47,8 +48,8 @@ class DefaultButton extends StatelessWidget {
             backgroundColor: isEnabled == false
                 ? AppColors.purple50
                 : showErrorColor == true
-                ? AppColors.red
-                : color),
+                    ? AppColors.red
+                    : color),
         child: content);
   }
 
@@ -73,8 +74,11 @@ class DefaultButton extends StatelessWidget {
             leadIcon,
             color: textColor,
           ),
-        if(leadIcon == null && suffixIcon != null) Icon(
-          suffixIcon, color: Colors.transparent,),
+        if (leadIcon == null && suffixIcon != null)
+          Icon(
+            suffixIcon,
+            color: Colors.transparent,
+          ),
         if (text != null)
           Expanded(
             child: DefaultText(
@@ -86,8 +90,11 @@ class DefaultButton extends StatelessWidget {
             ),
           ),
         if (suffixIcon != null) Icon(suffixIcon, color: textColor),
-        if(leadIcon != null && suffixIcon == null) Icon(
-          leadIcon, color: Colors.transparent,)
+        if (leadIcon != null && suffixIcon == null)
+          Icon(
+            leadIcon,
+            color: Colors.transparent,
+          )
       ],
     );
   }

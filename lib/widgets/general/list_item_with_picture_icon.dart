@@ -22,12 +22,12 @@ class ListItemWithPictureIcon extends StatelessWidget {
       this.photoUrl,
       this.title,
       this.icon,
-        this.endWidget,
+      this.endWidget,
       this.onTap,
       this.borderColor = AppColors.purple,
       this.backgroundColor = Colors.transparent,
-        this.titleColor,
-        this.avatarColor,
+      this.titleColor,
+      this.avatarColor,
       this.iconColor});
 
   @override
@@ -69,9 +69,8 @@ class ListItemWithPictureIcon extends StatelessWidget {
                       alignment: Alignment.centerRight,
                       child: Icon(icon, color: iconColor ?? borderColor))
                 ],
-                if(endWidget != null) Align(
-                    alignment: Alignment.centerRight,
-                    child: endWidget!)
+                if (endWidget != null)
+                  Align(alignment: Alignment.centerRight, child: endWidget!)
               ],
             ),
           ],

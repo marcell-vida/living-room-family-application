@@ -1,6 +1,8 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:living_room/extension/dart/datetime_extension.dart';
+import 'package:living_room/state/screen/stats/stats_bloc.dart';
 import 'package:living_room/util/constants.dart';
 import 'package:living_room/widgets/default/default_card.dart';
 import 'package:living_room/widgets/default/default_container.dart';
@@ -10,43 +12,47 @@ import 'package:living_room/widgets/spacers.dart';
 
 class StatsDateCard extends StatelessWidget {
   final String? title;
+  final WeekStat weekStat;
 
-  const StatsDateCard({super.key, this.title});
+  const StatsDateCard({super.key, this.title, required this.weekStat});
 
   @override
   Widget build(BuildContext context) {
+    String dateTitle = '${weekStat.startDate.toMMdd} - '
+        '${weekStat.endDate.toMMdd}';
+
     return DefaultCard(
       child: DefaultExpansionTile(
-        title: title,
+        title: dateTitle,
         titleColor: AppColors.grey2,
         borderLess: true,
         children: [
-          const Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Column(
                 children: [
                   DefaultText(
-                    '20',
+                    '${weekStat.all}',
                     fontSize: 20,
                     color: AppColors.grey2,
                   ),
-                  DefaultText(
+                  const DefaultText(
                     'feladat összesen',
                     fontSize: 12,
                     color: AppColors.grey2,
                   )
                 ],
               ),
-              HorizontalSpacer.of20(),
+              const HorizontalSpacer.of20(),
               Column(
                 children: [
                   DefaultText(
-                    '11',
+                    '${weekStat.approved}',
                     fontSize: 20,
                     color: AppColors.grey2,
                   ),
-                  DefaultText(
+                  const DefaultText(
                     'elfogadott teljesítés',
                     fontSize: 12,
                     color: AppColors.grey2,
@@ -56,10 +62,14 @@ class StatsDateCard extends StatelessWidget {
             ],
           ),
           const VerticalSpacer.of40(),
-          _familyTile(context,
-              title: 'Vida család', approved: 8, finished: 2, unfinished: 3),
-          const VerticalSpacer.of20(),
-          _familyTile(context, title: 'Kiss család', approved: 3, finished: 4),
+          for (FamilyStat familyStat in weekStat.familyStats) ...[
+            _familyTile(context,
+                title: familyStat.name,
+                approved: familyStat.approved.toDouble(),
+                finished: familyStat.finished.toDouble(),
+                unfinished: familyStat.unfinished.toDouble()),
+            const VerticalSpacer.of20(),
+          ]
         ],
       ),
     );
@@ -70,17 +80,15 @@ class StatsDateCard extends StatelessWidget {
       double? approved,
       double? finished,
       double? unfinished}) {
-
     String approvedString = approved != null && approved > 0
         ? '${approved.toInt().toString()} elfogadott'
         : '';
-String finishedString = finished != null && finished > 0
+    String finishedString = finished != null && finished > 0
         ? '${finished.toInt().toString()} teljesített'
         : '';
-String unfinishedString = unfinished != null && unfinished > 0
+    String unfinishedString = unfinished != null && unfinished > 0
         ? '${unfinished.toInt().toString()} befejezetlen'
         : '';
-
 
     return DefaultContainer(
       borderColor: AppColors.grey2,
@@ -104,26 +112,29 @@ String unfinishedString = unfinished != null && unfinished > 0
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  if(approvedString.isNotEmpty) DefaultText(
-                    approvedString,
-                    color: AppColors.blue,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    textAlign: TextAlign.start,
-                  ),
-                  if(finishedString.isNotEmpty) DefaultText(
-                    finishedString,
-                    color: AppColors.sand,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    textAlign: TextAlign.left,
-                  ),
-                  if(unfinishedString.isNotEmpty) DefaultText(
-                    unfinishedString,
-                    color: AppColors.red,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  if (approvedString.isNotEmpty)
+                    DefaultText(
+                      approvedString,
+                      color: AppColors.blue,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      textAlign: TextAlign.start,
+                    ),
+                  if (finishedString.isNotEmpty)
+                    DefaultText(
+                      finishedString,
+                      color: AppColors.sand,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      textAlign: TextAlign.left,
+                    ),
+                  if (unfinishedString.isNotEmpty)
+                    DefaultText(
+                      unfinishedString,
+                      color: AppColors.red,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                    ),
                 ],
               ),
               _pieChart(

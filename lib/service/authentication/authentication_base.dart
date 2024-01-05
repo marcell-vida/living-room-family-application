@@ -25,7 +25,7 @@ abstract class AuthenticationBase {
 
   void changePassword(
       {required String newPassword,
-        required String currentPassword,
+      required String currentPassword,
       Function()? onError,
       Function(SuccessMessage)? onSuccess});
 

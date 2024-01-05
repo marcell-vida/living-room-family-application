@@ -22,8 +22,8 @@ class GoalDetails {
       required this.defaultContext,
       required this.familyId,
       required this.userId,
-      this.existingGoalId}){
-   _show();
+      this.existingGoalId}) {
+    _show();
   }
 
   void _show() {
